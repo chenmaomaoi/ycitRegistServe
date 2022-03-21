@@ -59,5 +59,14 @@ namespace RegistServe.DB.Domain
         /// </summary>
         public bool LastRegistState { get; set; }
 
+        /// <summary>
+        /// QQ
+        /// </summary>
+        public string QQ { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark { get; set; }
     }
 }

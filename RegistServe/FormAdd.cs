@@ -7,31 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RegistServe.DB.Domain;
+using ycit;
 
 namespace RegistServe
 {
-    public partial class FormMain : Form
+    public partial class FormAdd : Form
     {
-        public FormMain()
+        public User user { get; set; }
+
+        public FormAdd()
         {
             InitializeComponent();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btn_Login_Click(object sender, EventArgs e)
         {
-            //todo:新建用户
-            FormAdd add = new FormAdd();
-
-            if (add.ShowDialog(this) == DialogResult.OK)
+            user = new User(text_Username.Text, text_Password.Text);
+            if (user.Login())
             {
-                
+                //todo:登录成功，获取基本信息
             }
             else
             {
-
+                MessageBox.Show("登录失败");
             }
-
         }
     }
 }
