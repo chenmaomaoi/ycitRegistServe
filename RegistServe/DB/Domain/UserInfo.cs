@@ -12,7 +12,7 @@ namespace RegistServe.DB.Domain
         /// </summary>
         [Key]
         [Required]
-        public Guid GUID { get; set; }
+        public string GUID { get; set; }
 
         /// <summary>
         /// 姓名
@@ -68,5 +68,10 @@ namespace RegistServe.DB.Domain
         /// 备注
         /// </summary>
         public string Remark { get; set; }
+
+        public object[] ToObjicts()
+        {
+            return new object[] { GUID, Name, Username, Password, Csrftoken, Sessionid, StartTime, EndTime, LastRegistTime, LastRegistState, QQ, Remark };
+        }
     }
 }

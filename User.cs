@@ -151,7 +151,7 @@ namespace ycit
                 {
                     //点击填报按钮
                     chromeDriver.FindElement(By.Id("regist_button")).Click();
-                    new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 3));
+                    Thread.Sleep(2000);
 
                     //使用上次填报的内容
                     if (new Uri(chromeDriver.Url).AbsolutePath == PathRegist)
@@ -177,6 +177,7 @@ namespace ycit
                         {
                             if (chromeDriver.FindElement(By.Id("regist_button")).Text == Filled)
                             {
+                                chromeDriver.Close();
                                 return true;
                             }
                         }

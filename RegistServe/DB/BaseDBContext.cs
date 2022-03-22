@@ -15,8 +15,8 @@ namespace RegistServe.DB
         }
 
         //在此处添加实体
-        public DbSet<RegistLog> RegistLogs { get; set; }
+        public virtual DbSet<RegistLog> RegistLogs { get; set; }
 
-        public DbSet<UserInfo> UserInfos { get; set; }
+        public virtual DbSet<UserInfo> UserInfos { get; set; }
     }
 }

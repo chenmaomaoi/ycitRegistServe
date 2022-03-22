@@ -181,7 +181,8 @@ namespace RegistServe.DB
 
         private IQueryable<T> Filter<T>(Expression<Func<T, bool>> exp) where T : class
         {
-            var dbSet = _context.Set<T>().AsNoTracking().AsQueryable();
+            //var dbSet = _context.Set<T>().AsNoTracking().AsQueryable();
+            var dbSet = _context.Set<T>().AsQueryable();
             if (exp != null)
                 dbSet = dbSet.Where(exp);
             return dbSet;
