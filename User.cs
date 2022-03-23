@@ -105,21 +105,34 @@ namespace ycit
         /// <returns></returns>
         public bool HasLogin()
         {
-            return WebHelper.Get(new Uri(URL), $"csrftoken={this.Csrftoken};sessionid={this.Sessionid}", userAgent: UserAgent).Contains("个人信息");
+            return WebHelper.Get(new Uri(URL + PathProfile), $"csrftoken={this.Csrftoken};sessionid={this.Sessionid}", userAgent: UserAgent).Contains("个人信息");
         }
 
         /// <summary>
         /// 填报
         /// </summary>
-        /// <returns>必然 return true，不然会抛出异常</returns>
-        /// <exception cref="登录失效"></exception>
-        /// <exception cref="非上报时间"></exception>
-        /// <exception cref="填报发生意外错误"></exception>
+        /// <returns>
+        /// <para/><see langword="true"/>填报成功或已填报
+        /// <para/><see langword="false"/>填报失败
+        /// </returns>
+        /// <exception cref="InvalidOperationException">Error</exception>
+        /// <exception cref="未登录"></exception>
+        /// <exception cref="打开个人信息页面失败"></exception>
+        /// <exception cref="打开填报页面失败"></exception>
+        /// <exception cref="使用上次填报内容失败，获取元素 .van-dialog__confirm 超时"></exception>
+        /// <exception cref="填报完成但等待返回页面超时"></exception>
+        /// <exception cref="Exception">Waring</exception>
+        /// <exception cref="非填报时间等错误"></exception>
         public bool Regist()
         {
+            if (!HasLogin())
+            {
+                throw new InvalidOperationException("未登录");
+            }
+
+            //初始化 ChromeDriver
             ChromeOptions options = new ChromeOptions();
             options.AddArgument($"User-Agent={UserAgent}");
-
             ChromeDriver chromeDriver = new ChromeDriver(ChromeDriverPath, options)
             {
                 Url = URL
@@ -127,83 +140,133 @@ namespace ycit
 
             try
             {
+                //打开个人信息页面
+                if (!GoToProfilePage(chromeDriver))
+                {
+                    throw new InvalidOperationException("打开个人信息页面失败");
+                }
+
+                //获取当前填报状态
+                string vs = chromeDriver.FindElement(By.Id("regist_button")).Text;
+                if (vs == CanFill)
+                {
+                    //未填报
+                    if (!GotoRegistPage(chromeDriver))
+                    {
+                        throw new InvalidOperationException("打开填报页面失败");
+                    }
+
+                    //尝试使用上次填报的内容
+                    return Confirm(chromeDriver);
+                }
+                else if (vs == Filled)
+                {
+                    //已填报
+                    return true;
+                }
+                else
+                {
+                    //非填报时间等
+                    throw new Exception(vs);
+                }
+            }
+            catch
+            {
+                chromeDriver.Close();
+                chromeDriver.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 打开个人信息页面
+        /// </summary>
+        /// <param name="chromeDriver"></param>
+        private bool GoToProfilePage(ChromeDriver chromeDriver)
+        {
+            try
+            {
                 //设置cookie
                 chromeDriver.Manage().Cookies.DeleteAllCookies();
                 chromeDriver.Manage().Cookies.AddCookie(new Cookie("csrftoken", Csrftoken, new Uri(URL).Host, "/", null));
                 chromeDriver.Manage().Cookies.AddCookie(new Cookie("sessionid", Sessionid, new Uri(URL).Host, "/", null));
 
-                //打开填报页面
+                //打开个人信息页面
                 chromeDriver.Navigate().GoToUrl(URL + PathProfile);
                 new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 3));
 
-                //获取当前状态
-                string state;
-                try
-                {
-                    state = chromeDriver.FindElement(By.Id("regist_button")).Text;
-                }
-                catch (Exception)
-                {
-                    throw new Exception("未找到填报按钮，可能是登录信息失效，需要重新登录");
-                }
-
-                if (state == CanFill)
-                {
-                    //点击填报按钮
-                    chromeDriver.FindElement(By.Id("regist_button")).Click();
-                    Thread.Sleep(2000);
-
-                    //使用上次填报的内容
-                    if (new Uri(chromeDriver.Url).AbsolutePath == PathRegist)
-                    {
-                        try
-                        {
-                            chromeDriver.FindElement(By.CssSelector(".van-dialog__confirm")).Click();
-                        }
-                        catch (Exception)
-                        {
-                            throw new Exception("使用上次填报内容失败，找不到元素 .van-dialog__confirm");
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("打开填报页面失败");
-                    }
-
-                    //等待页面返回，检查填报状态
-                    for (int i = 0; i < 50; i++)
-                    {
-                        try
-                        {
-                            if (chromeDriver.FindElement(By.Id("regist_button")).Text == Filled)
-                            {
-                                chromeDriver.Close();
-                                return true;
-                            }
-                        }
-                        catch (Exception)
-                        {
-                            Thread.Sleep(200);
-                        }
-                    }
-
-                    throw new Exception("填报完成但等待返回页面超时");
-                }
-                else if (state == Filled)
-                {
-                    chromeDriver.Close();
-                    return true;
-                }
-                else
-                {
-                    throw new Exception(state);
-                }
+                //检查填报按钮是否存在
+                _ = chromeDriver.FindElement(By.Id("regist_button")).Text;
+                return true;
             }
             catch (Exception)
             {
-                chromeDriver.Close();
-                throw;
+                return false;
             }
+        }
+
+        /// <summary>
+        /// 打开填报页面
+        /// </summary>
+        /// <param name="chromeDriver"></param>
+        /// <returns></returns>
+        private bool GotoRegistPage(ChromeDriver chromeDriver)
+        {
+            try
+            {
+                //点击填报按钮
+                chromeDriver.FindElement(By.Id("regist_button")).Click();
+                //检查是否跳转到了填报页面，并返回结果
+                Thread.Sleep(100);
+                return new Uri(chromeDriver.Url).AbsolutePath == PathRegist;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 尝试使用上次填报的内容
+        /// </summary>
+        /// <returns>填报结果</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="使用上次填报内容失败，获取元素 .van-dialog__confirm 超时"></exception>
+        /// <exception cref="填报完成但等待返回页面超时"></exception>
+        private bool Confirm(ChromeDriver chromeDriver)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                try
+                {
+                    //使用上次填报的内容
+                    chromeDriver.FindElement(By.CssSelector(".van-dialog__confirm")).Click();
+                    Thread.Sleep(500);
+
+                    //页面返回
+                    if (new Uri(chromeDriver.Url).AbsolutePath == PathProfile)
+                    {
+                        //等待页面返回，检查填报状态
+                        for (int j = 0; j < 50; j++)
+                        {
+                            try
+                            {
+                                return chromeDriver.FindElement(By.Id("regist_button")).Text == Filled;
+                            }
+                            catch (Exception)
+                            {
+                                Thread.Sleep(200);
+                            }
+                        }
+                        throw new InvalidOperationException("填报完成但等待返回页面超时");
+                    }
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(200);
+                }
+            }
+            throw new InvalidOperationException("使用上次填报内容失败，获取元素 .van-dialog__confirm 超时");
         }
     }
 }

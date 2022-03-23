@@ -18,6 +18,11 @@ namespace RegistServe
 
         public UserInfo userInfo { get; private set; }
 
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <remarks>初始化窗口数据</remarks>
+        /// <param name="userInfo"></param>
         public FormAddAndUpdate(UserInfo userInfo = null)
         {
             InitializeComponent();
@@ -45,6 +50,11 @@ namespace RegistServe
             }
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Login_Click(object sender, EventArgs e)
         {
             user = new User(text_Username.Text, text_Password.Text);
@@ -61,6 +71,11 @@ namespace RegistServe
             }
         }
 
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Save_Click(object sender, EventArgs e)
         {
             userInfo.Username = this.text_Username.Text;
@@ -81,14 +96,23 @@ namespace RegistServe
             DialogResult = DialogResult.OK;
         }
 
+        /// <summary>
+        /// 取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Cancer_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }
 
+        /// <summary>
+        /// todo:查看日志
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Log_Click(object sender, EventArgs e)
         {
-            //todo:查看日志
 
         }
     }

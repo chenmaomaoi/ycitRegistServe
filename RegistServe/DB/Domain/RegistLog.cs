@@ -12,7 +12,12 @@ namespace RegistServe.DB.Domain
         /// </summary>
         [Key]
         [Required]
-        public Guid GUID { get; set; }
+        public string GUID { get; set; }
+
+        /// <summary>
+        /// 账号
+        /// </summary>
+        public string Username { get; set; }
 
         /// <summary>
         /// 姓名

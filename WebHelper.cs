@@ -36,6 +36,7 @@ namespace ycit
             }
             request.Timeout = timeout;
             request.Method = "GET";
+
             if (!string.IsNullOrWhiteSpace(userAgent))
             {
                 request.UserAgent = userAgent;
