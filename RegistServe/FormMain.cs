@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using RegistServe.DB.Domain;
 using ycit;
@@ -14,6 +15,9 @@ namespace RegistServe
 {
     public partial class FormMain : Form
     {
+
+        private static System.Timers.Timer timer;
+
         public FormMain()
         {
             InitializeComponent();
@@ -50,6 +54,7 @@ namespace RegistServe
         private void FormMain_Load(object sender, EventArgs e)
         {
             Refersh();
+            InitTimer();
         }
 
         /// <summary>
@@ -109,7 +114,7 @@ namespace RegistServe
         }
 
         /// <summary>
-        /// todo:查看选中的日志
+        /// 查看选中的日志
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,9 +124,29 @@ namespace RegistServe
             {
                 return;
             }
-            int selectIndex = dataGridView.CurrentCell.RowIndex;
-            string selectGUID = dataGridView.Rows[selectIndex].Cells[dGUID.Name].Value.ToString();
 
+            //检查所有复选框，复选框有选中则修改单项
+            bool flag = false;
+            List<string> selectUsernames = new List<string>();
+
+            foreach (DataGridViewRow item in dataGridView.Rows)
+            {
+                if ((bool)item.Cells[dSelect.Name].Value)
+                {
+                    selectUsernames.Add(item.Cells[dUsername.Name].Value.ToString());
+
+                    flag = true;
+                }
+            }
+
+            if (!flag)
+            {
+                int selectIndex = dataGridView.CurrentCell.RowIndex;
+                selectUsernames.Add(dataGridView.Rows[selectIndex].Cells[dUsername.Name].Value.ToString());
+            }
+
+            FormLogViewer logViewer = new FormLogViewer(selectUsernames.ToArray());
+            logViewer.ShowDialog(this);
         }
 
         /// <summary>
@@ -137,14 +162,15 @@ namespace RegistServe
             }
             //检查所有复选框，复选框有选中则修改单项
             bool flag = false;
+
+            //todo:改造foreach，提升性能（experssion）
             foreach (DataGridViewRow item in dataGridView.Rows)
             {
                 if ((bool)item.Cells[dSelect.Name].Value)
                 {
                     string s = item.Cells[dGUID.Name].Value.ToString();
                     UserInfo selectUserInfo = Program.UnitWork.Find<UserInfo>(p => p.GUID == s).First();
-                    Regist(selectUserInfo);
-
+                    MessageBox.Show(Regist(selectUserInfo));
                     flag = true;
                 }
             }
@@ -155,7 +181,7 @@ namespace RegistServe
                 string selectGUID = dataGridView.Rows[selectIndex].Cells[dGUID.Name].Value.ToString();
 
                 UserInfo selectUserInfo = Program.UnitWork.Find<UserInfo>(p => p.GUID == selectGUID).First();
-                Regist(selectUserInfo);
+                MessageBox.Show(Regist(selectUserInfo));
             }
 
             Program.UnitWork.Save();
@@ -166,7 +192,7 @@ namespace RegistServe
         /// 填报
         /// </summary>
         /// <param name="userInfo"></param>
-        private void Regist(UserInfo userInfo)
+        private string Regist(UserInfo userInfo)
         {
             string message;
             bool registState = false;
@@ -191,10 +217,10 @@ namespace RegistServe
             }
             userInfo.LastRegistTime = DateTime.Now;
             userInfo.LastRegistState = registState;
-            Update(userInfo);
+            Program.UnitWork.Update(userInfo);
 
             Logger.Logging(userInfo, message, level);
-            MessageBox.Show(message);
+            return message;
         }
 
         /// <summary>
@@ -301,19 +327,70 @@ namespace RegistServe
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_AlarmDo_Click(object sender, EventArgs e)
+        private void btn_SetAlarm_Click(object sender, EventArgs e)
         {
+            FormSetAlarm formSetAlarm = new FormSetAlarm();
+            formSetAlarm.ShowDialog(this);
 
+            timer.Enabled = Program.AlarmEnabled;
         }
 
         /// <summary>
-        /// todo:查看所有日志
+        /// 查看所有日志
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_ViewAllLogs_Click(object sender, EventArgs e)
         {
+            FormLogViewer logViewer = new FormLogViewer();
+            logViewer.ShowDialog(this);
+        }
 
+        /// <summary>
+        /// 初始化Timer控件
+        /// </summary>
+        private void InitTimer()
+        {
+            //设置定时间隔(毫秒为单位)
+            int interval = 1000 * 30;
+            timer = new System.Timers.Timer(interval)
+            {
+                //设置执行一次（false）还是一直执行(true)
+                AutoReset = true,
+                //设置是否执行System.Timers.Timer.Elapsed事件
+                Enabled = Program.AlarmEnabled
+            };
+            //绑定Elapsed事件
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(Timer_Elapsed);
+        }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            // 得到 hour minute second  如果等于某个值就开始执行
+            int intHour = e.SignalTime.Hour;
+            int intMinute = e.SignalTime.Minute;
+            //int intSecond = e.SignalTime.Second;
+            // 定制时间,在00：00：00 的时候执行
+            int iHour = Program.HH;
+            int iMinute = Program.MM;
+            //int iSecond = 00;
+            // 设置 每天的00：00：00开始执行程序
+            if (intHour == iHour && intMinute == iMinute/* && intSecond == iSecond*/)
+            {
+                //全部填报
+                IQueryable<UserInfo> userInfos = Program.UnitWork.Find<UserInfo>();
+
+                foreach (UserInfo userInfo in userInfos)
+                {
+                    Regist(userInfo);
+                }
+
+                Program.UnitWork.Save();
+                this.Invoke(new EventHandler(delegate
+                {
+                    Refersh();
+                }));
+            }
         }
     }
 }

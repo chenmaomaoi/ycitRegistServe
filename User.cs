@@ -157,11 +157,16 @@ namespace ycit
                     }
 
                     //尝试使用上次填报的内容
-                    return Confirm(chromeDriver);
+                    bool result = Confirm(chromeDriver);
+                    chromeDriver.Close();
+                    chromeDriver.Dispose();
+                    return result;
                 }
                 else if (vs == Filled)
                 {
                     //已填报
+                    chromeDriver.Close();
+                    chromeDriver.Dispose();
                     return true;
                 }
                 else

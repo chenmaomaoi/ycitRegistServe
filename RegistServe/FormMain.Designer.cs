@@ -51,7 +51,7 @@
             this.btn_RegistSelect = new System.Windows.Forms.Button();
             this.check_SelectFailed = new System.Windows.Forms.CheckBox();
             this.btn_ViewAllLogs = new System.Windows.Forms.Button();
-            this.btn_AlarmDo = new System.Windows.Forms.Button();
+            this.btn_SetAlarm = new System.Windows.Forms.Button();
             this.group_System = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.group_User.SuspendLayout();
@@ -294,20 +294,20 @@
             this.btn_ViewAllLogs.UseVisualStyleBackColor = true;
             this.btn_ViewAllLogs.Click += new System.EventHandler(this.btn_ViewAllLogs_Click);
             // 
-            // btn_AlarmDo
+            // btn_SetAlarm
             // 
-            this.btn_AlarmDo.Location = new System.Drawing.Point(6, 27);
-            this.btn_AlarmDo.Name = "btn_AlarmDo";
-            this.btn_AlarmDo.Size = new System.Drawing.Size(106, 33);
-            this.btn_AlarmDo.TabIndex = 2;
-            this.btn_AlarmDo.Text = "定时填报";
-            this.btn_AlarmDo.UseVisualStyleBackColor = true;
-            this.btn_AlarmDo.Click += new System.EventHandler(this.btn_AlarmDo_Click);
+            this.btn_SetAlarm.Location = new System.Drawing.Point(6, 27);
+            this.btn_SetAlarm.Name = "btn_SetAlarm";
+            this.btn_SetAlarm.Size = new System.Drawing.Size(106, 33);
+            this.btn_SetAlarm.TabIndex = 2;
+            this.btn_SetAlarm.Text = "定时填报";
+            this.btn_SetAlarm.UseVisualStyleBackColor = true;
+            this.btn_SetAlarm.Click += new System.EventHandler(this.btn_SetAlarm_Click);
             // 
             // group_System
             // 
             this.group_System.Controls.Add(this.btn_ViewAllLogs);
-            this.group_System.Controls.Add(this.btn_AlarmDo);
+            this.group_System.Controls.Add(this.btn_SetAlarm);
             this.group_System.Location = new System.Drawing.Point(1543, 301);
             this.group_System.Name = "group_System";
             this.group_System.Size = new System.Drawing.Size(127, 107);
@@ -342,7 +342,7 @@
         private System.Windows.Forms.Button btn_ViewLogs;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.GroupBox group_User;
-        private System.Windows.Forms.Button btn_AlarmDo;
+        private System.Windows.Forms.Button btn_SetAlarm;
         private System.Windows.Forms.Button btn_RegistSelect;
         private System.Windows.Forms.Button btn_ViewAllLogs;
         private System.Windows.Forms.CheckBox check_SelectFailed;

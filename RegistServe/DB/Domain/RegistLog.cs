@@ -38,6 +38,11 @@ namespace RegistServe.DB.Domain
         /// 信息
         /// </summary>
         public string Message { get; set; }
+
+        public object[] ToObject()
+        {
+            return new object[] { GUID, Username, Name, LogLevel, Time, Message };
+        }
     }
 
     public enum LogLevel

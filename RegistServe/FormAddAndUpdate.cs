@@ -107,13 +107,14 @@ namespace RegistServe
         }
 
         /// <summary>
-        /// todo:查看日志
+        /// 查看日志
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_Log_Click(object sender, EventArgs e)
         {
-
+            FormLogViewer logViewer = new FormLogViewer(userInfo.Username);
+            logViewer.ShowDialog(this);
         }
     }
 }
