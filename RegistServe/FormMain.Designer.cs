@@ -52,16 +52,16 @@
             this.check_SelectFailed = new System.Windows.Forms.CheckBox();
             this.btn_ViewAllLogs = new System.Windows.Forms.Button();
             this.group_Alarm = new System.Windows.Forms.GroupBox();
-            this.numeric_Minute = new System.Windows.Forms.NumericUpDown();
             this.numeric_Hour = new System.Windows.Forms.NumericUpDown();
-            this.check_AlarmEnable = new System.Windows.Forms.CheckBox();
+            this.numeric_Minute = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.check_AlarmEnable = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.group_User.SuspendLayout();
             this.group_Alarm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Hour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -314,18 +314,6 @@
             this.group_Alarm.TabStop = false;
             this.group_Alarm.Text = "定时填报";
             // 
-            // numeric_Minute
-            // 
-            this.numeric_Minute.Location = new System.Drawing.Point(60, 61);
-            this.numeric_Minute.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            this.numeric_Minute.Name = "numeric_Minute";
-            this.numeric_Minute.Size = new System.Drawing.Size(61, 28);
-            this.numeric_Minute.TabIndex = 9;
-            // 
             // numeric_Hour
             // 
             this.numeric_Hour.Location = new System.Drawing.Point(60, 27);
@@ -338,6 +326,27 @@
             this.numeric_Hour.Size = new System.Drawing.Size(61, 28);
             this.numeric_Hour.TabIndex = 8;
             // 
+            // numeric_Minute
+            // 
+            this.numeric_Minute.Location = new System.Drawing.Point(60, 61);
+            this.numeric_Minute.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numeric_Minute.Name = "numeric_Minute";
+            this.numeric_Minute.Size = new System.Drawing.Size(61, 28);
+            this.numeric_Minute.TabIndex = 9;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 18);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "分：";
+            // 
             // check_AlarmEnable
             // 
             this.check_AlarmEnable.AutoSize = true;
@@ -348,15 +357,6 @@
             this.check_AlarmEnable.Text = "启用";
             this.check_AlarmEnable.UseVisualStyleBackColor = true;
             this.check_AlarmEnable.CheckedChanged += new System.EventHandler(this.check_AlarmEnable_CheckedChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 18);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "分：";
             // 
             // label1
             // 
@@ -376,7 +376,6 @@
             this.Controls.Add(this.group_Alarm);
             this.Controls.Add(this.group_User);
             this.Controls.Add(this.dataGridView);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -385,8 +384,8 @@
             this.group_User.PerformLayout();
             this.group_Alarm.ResumeLayout(false);
             this.group_Alarm.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Hour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).EndInit();
             this.ResumeLayout(false);
 
         }
