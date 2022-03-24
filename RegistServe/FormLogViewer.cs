@@ -26,7 +26,7 @@ namespace RegistServe
             //加载日志
             dataGridView.Rows.Clear();
 
-            IQueryable<RegistLog> registLogs = Program.UnitWork.Finds<RegistLog>(GetExpression(usernames));
+            IQueryable<RegistLog> registLogs = Program.UnitWork.Finds<RegistLog>(GetExpression(usernames)).OrderByDescending(p => p.Time);
 
             foreach (RegistLog registLog in registLogs)
             {

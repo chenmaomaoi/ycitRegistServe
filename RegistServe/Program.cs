@@ -11,11 +11,6 @@ namespace RegistServe
     {
         public static UnitWork<BaseDBContext> UnitWork { get; set; }
 
-        public static bool AlarmEnabled = false;
-
-        public static ushort HH = 0;
-        public static ushort MM = 0;
-
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

@@ -51,11 +51,17 @@
             this.btn_RegistSelect = new System.Windows.Forms.Button();
             this.check_SelectFailed = new System.Windows.Forms.CheckBox();
             this.btn_ViewAllLogs = new System.Windows.Forms.Button();
-            this.btn_SetAlarm = new System.Windows.Forms.Button();
-            this.group_System = new System.Windows.Forms.GroupBox();
+            this.group_Alarm = new System.Windows.Forms.GroupBox();
+            this.numeric_Minute = new System.Windows.Forms.NumericUpDown();
+            this.numeric_Hour = new System.Windows.Forms.NumericUpDown();
+            this.check_AlarmEnable = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.group_User.SuspendLayout();
-            this.group_System.SuspendLayout();
+            this.group_Alarm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_Hour)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -286,7 +292,7 @@
             // 
             // btn_ViewAllLogs
             // 
-            this.btn_ViewAllLogs.Location = new System.Drawing.Point(6, 66);
+            this.btn_ViewAllLogs.Location = new System.Drawing.Point(1549, 434);
             this.btn_ViewAllLogs.Name = "btn_ViewAllLogs";
             this.btn_ViewAllLogs.Size = new System.Drawing.Size(106, 33);
             this.btn_ViewAllLogs.TabIndex = 3;
@@ -294,44 +300,93 @@
             this.btn_ViewAllLogs.UseVisualStyleBackColor = true;
             this.btn_ViewAllLogs.Click += new System.EventHandler(this.btn_ViewAllLogs_Click);
             // 
-            // btn_SetAlarm
+            // group_Alarm
             // 
-            this.btn_SetAlarm.Location = new System.Drawing.Point(6, 27);
-            this.btn_SetAlarm.Name = "btn_SetAlarm";
-            this.btn_SetAlarm.Size = new System.Drawing.Size(106, 33);
-            this.btn_SetAlarm.TabIndex = 2;
-            this.btn_SetAlarm.Text = "定时填报";
-            this.btn_SetAlarm.UseVisualStyleBackColor = true;
-            this.btn_SetAlarm.Click += new System.EventHandler(this.btn_SetAlarm_Click);
+            this.group_Alarm.Controls.Add(this.numeric_Hour);
+            this.group_Alarm.Controls.Add(this.numeric_Minute);
+            this.group_Alarm.Controls.Add(this.label2);
+            this.group_Alarm.Controls.Add(this.check_AlarmEnable);
+            this.group_Alarm.Controls.Add(this.label1);
+            this.group_Alarm.Location = new System.Drawing.Point(1543, 301);
+            this.group_Alarm.Name = "group_Alarm";
+            this.group_Alarm.Size = new System.Drawing.Size(127, 127);
+            this.group_Alarm.TabIndex = 8;
+            this.group_Alarm.TabStop = false;
+            this.group_Alarm.Text = "定时填报";
             // 
-            // group_System
+            // numeric_Minute
             // 
-            this.group_System.Controls.Add(this.btn_ViewAllLogs);
-            this.group_System.Controls.Add(this.btn_SetAlarm);
-            this.group_System.Location = new System.Drawing.Point(1543, 301);
-            this.group_System.Name = "group_System";
-            this.group_System.Size = new System.Drawing.Size(127, 107);
-            this.group_System.TabIndex = 8;
-            this.group_System.TabStop = false;
-            this.group_System.Text = "系统";
+            this.numeric_Minute.Location = new System.Drawing.Point(60, 61);
+            this.numeric_Minute.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numeric_Minute.Name = "numeric_Minute";
+            this.numeric_Minute.Size = new System.Drawing.Size(61, 28);
+            this.numeric_Minute.TabIndex = 9;
+            // 
+            // numeric_Hour
+            // 
+            this.numeric_Hour.Location = new System.Drawing.Point(60, 27);
+            this.numeric_Hour.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.numeric_Hour.Name = "numeric_Hour";
+            this.numeric_Hour.Size = new System.Drawing.Size(61, 28);
+            this.numeric_Hour.TabIndex = 8;
+            // 
+            // check_AlarmEnable
+            // 
+            this.check_AlarmEnable.AutoSize = true;
+            this.check_AlarmEnable.Location = new System.Drawing.Point(13, 95);
+            this.check_AlarmEnable.Name = "check_AlarmEnable";
+            this.check_AlarmEnable.Size = new System.Drawing.Size(70, 22);
+            this.check_AlarmEnable.TabIndex = 7;
+            this.check_AlarmEnable.Text = "启用";
+            this.check_AlarmEnable.UseVisualStyleBackColor = true;
+            this.check_AlarmEnable.CheckedChanged += new System.EventHandler(this.check_AlarmEnable_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 18);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "分：";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 18);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "时：";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1678, 823);
-            this.Controls.Add(this.group_System);
+            this.Controls.Add(this.btn_ViewAllLogs);
+            this.Controls.Add(this.group_Alarm);
             this.Controls.Add(this.group_User);
             this.Controls.Add(this.dataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.group_User.ResumeLayout(false);
             this.group_User.PerformLayout();
-            this.group_System.ResumeLayout(false);
+            this.group_Alarm.ResumeLayout(false);
+            this.group_Alarm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_Hour)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -342,12 +397,11 @@
         private System.Windows.Forms.Button btn_ViewLogs;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.GroupBox group_User;
-        private System.Windows.Forms.Button btn_SetAlarm;
         private System.Windows.Forms.Button btn_RegistSelect;
         private System.Windows.Forms.Button btn_ViewAllLogs;
         private System.Windows.Forms.CheckBox check_SelectFailed;
         private System.Windows.Forms.CheckBox check_SelectAll;
-        private System.Windows.Forms.GroupBox group_System;
+        private System.Windows.Forms.GroupBox group_Alarm;
         private System.Windows.Forms.Button btn_UpdateSelect;
         private System.Windows.Forms.Button btn_DelectSelect;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dSelect;
@@ -363,6 +417,11 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn dLastRegistState;
         private System.Windows.Forms.DataGridViewTextBoxColumn dQQ;
         private System.Windows.Forms.DataGridViewTextBoxColumn dRemark;
+        private System.Windows.Forms.NumericUpDown numeric_Minute;
+        private System.Windows.Forms.NumericUpDown numeric_Hour;
+        private System.Windows.Forms.CheckBox check_AlarmEnable;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

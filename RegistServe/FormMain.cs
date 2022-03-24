@@ -323,19 +323,6 @@ namespace RegistServe
         }
 
         /// <summary>
-        /// todo:定时填报
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_SetAlarm_Click(object sender, EventArgs e)
-        {
-            FormSetAlarm formSetAlarm = new FormSetAlarm();
-            formSetAlarm.ShowDialog(this);
-
-            timer.Enabled = Program.AlarmEnabled;
-        }
-
-        /// <summary>
         /// 查看所有日志
         /// </summary>
         /// <param name="sender"></param>
@@ -352,13 +339,13 @@ namespace RegistServe
         private void InitTimer()
         {
             //设置定时间隔(毫秒为单位)
-            int interval = 1000 * 30;
+            int interval = 1000 * 60;
             timer = new System.Timers.Timer(interval)
             {
                 //设置执行一次（false）还是一直执行(true)
                 AutoReset = true,
                 //设置是否执行System.Timers.Timer.Elapsed事件
-                Enabled = Program.AlarmEnabled
+                Enabled = check_AlarmEnable.Checked
             };
             //绑定Elapsed事件
             timer.Elapsed += new System.Timers.ElapsedEventHandler(Timer_Elapsed);
@@ -371,8 +358,8 @@ namespace RegistServe
             int intMinute = e.SignalTime.Minute;
             //int intSecond = e.SignalTime.Second;
             // 定制时间,在00：00：00 的时候执行
-            int iHour = Program.HH;
-            int iMinute = Program.MM;
+            int iHour = (int)numeric_Hour.Value;
+            int iMinute = (int)numeric_Minute.Value;
             //int iSecond = 00;
             // 设置 每天的00：00：00开始执行程序
             if (intHour == iHour && intMinute == iMinute/* && intSecond == iSecond*/)
@@ -391,6 +378,11 @@ namespace RegistServe
                     Refersh();
                 }));
             }
+        }
+
+        private void check_AlarmEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            timer.Enabled = check_AlarmEnable.Checked;
         }
     }
 }
