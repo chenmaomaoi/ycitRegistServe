@@ -240,7 +240,7 @@ namespace ycit
         /// <exception cref="填报完成但等待返回页面超时"></exception>
         private bool Confirm(ChromeDriver chromeDriver)
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 60; i++)
             {
                 try
                 {
@@ -268,7 +268,7 @@ namespace ycit
                 }
                 catch (Exception)
                 {
-                    Thread.Sleep(200);
+                    Thread.Sleep(500);
                 }
             }
             throw new InvalidOperationException("使用上次填报内容失败，获取元素 .van-dialog__confirm 超时");
