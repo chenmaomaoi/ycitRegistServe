@@ -10,6 +10,7 @@ using System.Timers;
 using System.Windows.Forms;
 using RegistServe.DB.Domain;
 using ycit;
+using RegistServe.Utils;
 
 namespace RegistServe
 {
@@ -365,14 +366,64 @@ namespace RegistServe
             if (intHour == iHour && intMinute == iMinute/* && intSecond == iSecond*/)
             {
                 //全部填报
-                IQueryable<UserInfo> userInfos = Program.UnitWork.Find<UserInfo>();
+                IQueryable<UserInfo> userInfos = Program.UnitWork.Find<UserInfo>(p => p.LastRegistTime != DateTime.Now);
 
-                foreach (UserInfo userInfo in userInfos)
+                if (userInfos.Count() > 0)
                 {
-                    Regist(userInfo);
+                    foreach (UserInfo userInfo in userInfos)
+                    {
+                        Regist(userInfo);
+                    }
+                    Program.UnitWork.Save();
                 }
 
-                Program.UnitWork.Save();
+
+                //发送日报到邮箱
+                string server = "smtp.163.com:25";
+                EmailSender emailSender = new EmailSender(server, "c1325242398@163.com", "WWRURIXBPYGJSGEO", "c1325242398@163.com");
+
+                StringBuilder builder = new StringBuilder();
+
+                //查询当日填报失败的并且打印日志
+                IQueryable<UserInfo> userFailed = Program.UnitWork.Find<UserInfo>(p => (p.LastRegistState == false));
+                if (userFailed != null)
+                {
+                    builder.AppendLine($"填报失败计数：{userFailed.Count()}");
+
+                    foreach (UserInfo user in userFailed)
+                    {
+                        var log = Program.UnitWork.Find<RegistServe.DB.Domain.RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
+                        if (log != null)
+                        {
+                            builder.AppendLine($"{log.Name}\r\n{log.Time}\r\n{log.LogLevel}\r\n{log.Message}\r\n");
+                        }
+                    }
+                }
+                else
+                {
+                    builder.AppendLine($"今天很棒，没有人填报失败o(*￣▽￣*)ブ");
+                }
+                //查询当日填报成功的并且打印日志
+                IQueryable<UserInfo> userSuccess = Program.UnitWork.Find<UserInfo>(p => p.LastRegistState);
+                if (userSuccess != null)
+                {
+                    builder.AppendLine($"填报成功计数：{userSuccess.Count()}");
+
+                    foreach (UserInfo user in userSuccess)
+                    {
+                        var log = Program.UnitWork.Find<RegistServe.DB.Domain.RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
+                        if (log != null)
+                        {
+                            builder.AppendLine($"{log.Name}\r\n{log.Time}\r\n{log.LogLevel}\r\n{log.Message}\r\n");
+                        }
+                    }
+                }
+                else
+                {
+                    builder.AppendLine($"糟糕的一天，没有人填报成功(T_T)");
+                }
+                emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), "1325242398@qq.com");
+
                 this.Invoke(new EventHandler(delegate
                 {
                     Refersh();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistServe.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,26 +16,31 @@ namespace Test
         [STAThread]
         static void Main(string[] args)
         {
-            user = new User("42280119990902281X",
-                            "c1325242398",
-                            "xqzu41ueJK5P0tcz2QnBmv72YBWNu7l3Kk9UQQs6rmH5ydpfGCfwO6ssK5k7gwj5",
-                            "94zj4srtvk1zk8evjv59tu7qxz2n25s1");
+            //user = new User("42280119990902281X",
+            //                "c1325242398",
+            //                "xqzu41ueJK5P0tcz2QnBmv72YBWNu7l3Kk9UQQs6rmH5ydpfGCfwO6ssK5k7gwj5",
+            //                "94zj4srtvk1zk8evjv59tu7qxz2n25s1");
 
-            user.Login();
+            //user.Login();
 
-            try
-            {
-                if (user.Regist())
-                {
-                    Console.WriteLine("填报成功");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"填报失败：{ex}");
-            }
+            //try
+            //{
+            //    if (user.Regist())
+            //    {
+            //        Console.WriteLine("填报成功");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"填报失败：{ex}");
+            //}
 
-            InitTimer();
+            //InitTimer();
+
+            string server = "smtp.163.com:25";
+            EmailSender emailSender = new EmailSender(server, "c1325242398@163.com", "WWRURIXBPYGJSGEO", "c1325242398@163.com");
+
+            emailSender.Send("Test", "这是测试正文", "1325242398@qq.com");
 
             Console.WriteLine("已启动");
             Console.ReadKey();

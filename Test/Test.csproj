@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RegistServe\RegistServe.csproj">
+      <Project>{97EA1BED-9341-45D9-BA18-FDA4BB696CAF}</Project>
+      <Name>RegistServe</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ycit.csproj">
       <Project>{dfdb0abd-3e29-4b76-8ebc-3f1da93aa9b2}</Project>
       <Name>ycit</Name>
