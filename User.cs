@@ -125,10 +125,10 @@ namespace ycit
         /// <exception cref="非填报时间等错误"></exception>
         public bool Regist()
         {
-            if (!HasLogin())
-            {
-                throw new InvalidOperationException("未登录");
-            }
+            //if (!HasLogin())
+            //{
+            //    throw new InvalidOperationException("未登录");
+            //}
 
             //初始化 ChromeDriver
             ChromeOptions options = new ChromeOptions();

@@ -197,9 +197,8 @@ namespace RegistServe
         {
             string message;
             bool registState = false;
-            LogLevel level = LogLevel.Info;
-
             User user = new User(csrftoken: userInfo.Csrftoken, sessionid: userInfo.Sessionid);
+            LogLevel level;
             try
             {
                 registState = user.Regist();
