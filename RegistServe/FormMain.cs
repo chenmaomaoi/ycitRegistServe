@@ -351,6 +351,11 @@ namespace RegistServe
             timer.Elapsed += new System.Timers.ElapsedEventHandler(Timer_Elapsed);
         }
 
+        /// <summary>
+        /// 定时填报
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // 得到 hour minute second  如果等于某个值就开始执行
@@ -364,6 +369,9 @@ namespace RegistServe
             // 设置 每天的00：00：00开始执行程序
             if (intHour == iHour && intMinute == iMinute/* && intSecond == iSecond*/)
             {
+
+                //todo:将全部填报和发送邮件日志拆分
+
                 //全部填报
                 IQueryable<UserInfo> userInfos = Program.UnitWork.Find<UserInfo>(p => p.LastRegistTime != DateTime.Now);
 
@@ -385,9 +393,9 @@ namespace RegistServe
 
                 //查询当日填报失败的并且打印日志
                 IQueryable<UserInfo> userFailed = Program.UnitWork.Find<UserInfo>(p => (p.LastRegistState == false));
-                if (userFailed != null)
+                if (userFailed?.Count() > 0)
                 {
-                    builder.AppendLine($"填报失败计数：{userFailed.Count()}");
+                    builder.AppendLine($"填报失败：{userFailed.Count()}");
 
                     foreach (UserInfo user in userFailed)
                     {
@@ -404,9 +412,9 @@ namespace RegistServe
                 }
                 //查询当日填报成功的并且打印日志
                 IQueryable<UserInfo> userSuccess = Program.UnitWork.Find<UserInfo>(p => p.LastRegistState);
-                if (userSuccess != null)
+                if (userSuccess?.Count() > 0)
                 {
-                    builder.AppendLine($"填报成功计数：{userSuccess.Count()}");
+                    builder.AppendLine($"填报成功：{userSuccess.Count()}");
 
                     foreach (UserInfo user in userSuccess)
                     {
@@ -430,6 +438,11 @@ namespace RegistServe
             }
         }
 
+        /// <summary>
+        /// 开启定时填报
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void check_AlarmEnable_CheckedChanged(object sender, EventArgs e)
         {
             timer.Enabled = check_AlarmEnable.Checked;
