@@ -369,9 +369,6 @@ namespace RegistServe
             // 设置 每天的00：00：00开始执行程序
             if (intHour == iHour && intMinute == iMinute/* && intSecond == iSecond*/)
             {
-
-                //todo:将全部填报和发送邮件日志拆分
-
                 //全部填报
                 IQueryable<UserInfo> userInfos = Program.UnitWork.Find<UserInfo>(p => p.LastRegistTime != DateTime.Now);
 
@@ -384,11 +381,6 @@ namespace RegistServe
                     Program.UnitWork.Save();
                 }
 
-
-                //发送日报到邮箱
-                string server = "smtp.163.com:25";
-                EmailSender emailSender = new EmailSender(server, "c1325242398@163.com", "WWRURIXBPYGJSGEO", "c1325242398@163.com");
-
                 StringBuilder builder = new StringBuilder();
 
                 //查询当日填报失败的并且打印日志
@@ -399,10 +391,15 @@ namespace RegistServe
 
                     foreach (UserInfo user in userFailed)
                     {
-                        var log = Program.UnitWork.Find<RegistServe.DB.Domain.RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
+                        RegistLog log = Program.UnitWork.Find<RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
                         if (log != null)
                         {
-                            builder.AppendLine($"{log.Name}\r\n{log.Time}\r\n{log.LogLevel}\r\n{log.Message}\r\n");
+                            builder.AppendLine(
+$@"{log.Name}
+{log.Time}
+{log.LogLevel}
+{log.Message}
+");
                         }
                     }
                 }
@@ -418,10 +415,15 @@ namespace RegistServe
 
                     foreach (UserInfo user in userSuccess)
                     {
-                        var log = Program.UnitWork.Find<RegistServe.DB.Domain.RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
+                        RegistLog log = Program.UnitWork.Find<RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
                         if (log != null)
                         {
-                            builder.AppendLine($"{log.Name}\r\n{log.Time}\r\n{log.LogLevel}\r\n{log.Message}\r\n");
+                            builder.AppendLine(
+$@"{log.Name}
+{log.Time}
+{log.LogLevel}
+{log.Message}
+");
                         }
                     }
                 }
@@ -429,6 +431,9 @@ namespace RegistServe
                 {
                     builder.AppendLine($"糟糕的一天，没有人填报成功(T_T)");
                 }
+
+                //发送日报到邮箱
+                EmailSender emailSender = new EmailSender("smtp.163.com:25", "c1325242398@163.com", "WWRURIXBPYGJSGEO", "c1325242398@163.com");
                 emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), "1325242398@qq.com");
 
                 this.Invoke(new EventHandler(delegate
