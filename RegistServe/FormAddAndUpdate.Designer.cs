@@ -46,7 +46,7 @@
             this.btn_Cancer = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.text_Remark = new System.Windows.Forms.TextBox();
-            this.text_QQ = new System.Windows.Forms.TextBox();
+            this.text_Email = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -59,6 +59,7 @@
             this.dateTimePicker_StartTime = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.btn_Log = new System.Windows.Forms.Button();
+            this.chk_EnableEmailNotification = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -81,7 +82,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(389, 235);
+            this.groupBox1.Size = new System.Drawing.Size(388, 235);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "账号信息";
@@ -108,7 +109,7 @@
             this.text_Sessionid.Enabled = false;
             this.text_Sessionid.Location = new System.Drawing.Point(120, 197);
             this.text_Sessionid.Name = "text_Sessionid";
-            this.text_Sessionid.Size = new System.Drawing.Size(253, 28);
+            this.text_Sessionid.Size = new System.Drawing.Size(252, 28);
             this.text_Sessionid.TabIndex = 10;
             // 
             // label6
@@ -168,7 +169,7 @@
             // 
             this.text_Password.Location = new System.Drawing.Point(74, 90);
             this.text_Password.Name = "text_Password";
-            this.text_Password.Size = new System.Drawing.Size(299, 28);
+            this.text_Password.Size = new System.Drawing.Size(298, 28);
             this.text_Password.TabIndex = 3;
             // 
             // text_Username
@@ -198,7 +199,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(245, 532);
+            this.btn_Save.Location = new System.Drawing.Point(244, 562);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(75, 33);
             this.btn_Save.TabIndex = 2;
@@ -208,7 +209,7 @@
             // 
             // btn_Cancer
             // 
-            this.btn_Cancer.Location = new System.Drawing.Point(326, 532);
+            this.btn_Cancer.Location = new System.Drawing.Point(325, 562);
             this.btn_Cancer.Name = "btn_Cancer";
             this.btn_Cancer.Size = new System.Drawing.Size(75, 33);
             this.btn_Cancer.TabIndex = 3;
@@ -218,35 +219,36 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chk_EnableEmailNotification);
             this.groupBox2.Controls.Add(this.text_Remark);
-            this.groupBox2.Controls.Add(this.text_QQ);
+            this.groupBox2.Controls.Add(this.text_Email);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(12, 253);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(389, 96);
+            this.groupBox2.Size = new System.Drawing.Size(388, 126);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "用户扩展信息";
             // 
             // text_Remark
             // 
-            this.text_Remark.Location = new System.Drawing.Point(74, 58);
+            this.text_Remark.Location = new System.Drawing.Point(74, 27);
             this.text_Remark.Name = "text_Remark";
-            this.text_Remark.Size = new System.Drawing.Size(298, 28);
+            this.text_Remark.Size = new System.Drawing.Size(297, 28);
             this.text_Remark.TabIndex = 3;
             // 
-            // text_QQ
+            // text_Email
             // 
-            this.text_QQ.Location = new System.Drawing.Point(74, 24);
-            this.text_QQ.Name = "text_QQ";
-            this.text_QQ.Size = new System.Drawing.Size(298, 28);
-            this.text_QQ.TabIndex = 2;
+            this.text_Email.Location = new System.Drawing.Point(74, 61);
+            this.text_Email.Name = "text_Email";
+            this.text_Email.Size = new System.Drawing.Size(298, 28);
+            this.text_Email.TabIndex = 2;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 61);
+            this.label8.Location = new System.Drawing.Point(4, 30);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 18);
             this.label8.TabIndex = 1;
@@ -255,11 +257,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 27);
+            this.label3.Location = new System.Drawing.Point(6, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 18);
+            this.label3.Size = new System.Drawing.Size(62, 18);
             this.label3.TabIndex = 0;
-            this.label3.Text = "QQ：";
+            this.label3.Text = "邮箱：";
             // 
             // groupBox3
             // 
@@ -271,9 +273,9 @@
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.dateTimePicker_StartTime);
             this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Location = new System.Drawing.Point(12, 355);
+            this.groupBox3.Location = new System.Drawing.Point(12, 385);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(389, 171);
+            this.groupBox3.Size = new System.Drawing.Size(388, 171);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "填报系统信息";
@@ -346,7 +348,7 @@
             // 
             // btn_Log
             // 
-            this.btn_Log.Location = new System.Drawing.Point(12, 532);
+            this.btn_Log.Location = new System.Drawing.Point(12, 562);
             this.btn_Log.Name = "btn_Log";
             this.btn_Log.Size = new System.Drawing.Size(75, 33);
             this.btn_Log.TabIndex = 6;
@@ -354,11 +356,21 @@
             this.btn_Log.UseVisualStyleBackColor = true;
             this.btn_Log.Click += new System.EventHandler(this.btn_Log_Click);
             // 
+            // chk_EnableEmailNotification
+            // 
+            this.chk_EnableEmailNotification.AutoSize = true;
+            this.chk_EnableEmailNotification.Location = new System.Drawing.Point(230, 95);
+            this.chk_EnableEmailNotification.Name = "chk_EnableEmailNotification";
+            this.chk_EnableEmailNotification.Size = new System.Drawing.Size(142, 22);
+            this.chk_EnableEmailNotification.TabIndex = 4;
+            this.chk_EnableEmailNotification.Text = "启用邮件提醒";
+            this.chk_EnableEmailNotification.UseVisualStyleBackColor = true;
+            // 
             // FormAddAndUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 573);
+            this.ClientSize = new System.Drawing.Size(415, 606);
             this.Controls.Add(this.btn_Log);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -402,7 +414,7 @@
         private System.Windows.Forms.TextBox text_GUID;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox text_Remark;
-        private System.Windows.Forms.TextBox text_QQ;
+        private System.Windows.Forms.TextBox text_Email;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DateTimePicker dateTimePicker_StartTime;
@@ -414,5 +426,6 @@
         private System.Windows.Forms.TextBox text_LastRegistState;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btn_Log;
+        private System.Windows.Forms.CheckBox chk_EnableEmailNotification;
     }
 }

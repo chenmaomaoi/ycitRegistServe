@@ -30,21 +30,27 @@ namespace RegistServe
         private void Refersh()
         {
             dataGridView.Rows.Clear();
-            IQueryable<UserInfo> userInfos = Program.UnitWork.Finds<UserInfo>(p => p.GUID != null);
-            foreach (UserInfo item in userInfos)
-            {
-                object[] obj = new object[dataGridView.ColumnCount];
-                obj[0] = (object)false;
 
-                object[] tmpObj = item.ToObjicts();
+            BindingList<UserInfo> users = new BindingList<UserInfo>(Program.UnitWork.Finds<UserInfo>(p => p.GUID != null).ToList());
 
-                for (int i = 0; i < tmpObj.Count(); i++)
-                {
-                    obj[i + 1] = tmpObj[i];
-                }
+            dataGridView.DataSource = users;
 
-                dataGridView.Rows.Add(obj);
-            }
+            //foreach (UserInfo item in userInfos)
+            //{
+            //    object[] obj = new object[dataGridView.ColumnCount];
+
+            //    //第一行用于选中
+            //    obj[0] = (object)false;
+
+            //    object[] tmpObj = item.ToObjicts();
+
+            //    for (int i = 0; i < tmpObj.Count(); i++)
+            //    {
+            //        obj[i + 1] = tmpObj[i];
+            //    }
+
+            //    dataGridView.Rows.Add(obj);
+            //}
         }
 
         /// <summary>
@@ -56,6 +62,10 @@ namespace RegistServe
         {
             Refersh();
             InitTimer();
+            //加载配置
+            numeric_Hour.Value = Program.Setting.TimerConfig.Hour;
+            numeric_Minute.Value = Program.Setting.TimerConfig.Minute;
+            check_TimerEnable.Checked = Program.Setting.TimerConfig.Enable;
         }
 
         /// <summary>
@@ -90,7 +100,7 @@ namespace RegistServe
             }
             foreach (DataGridViewRow item in dataGridView.Rows)
             {
-                item.Cells[dSelect.Name].Value = check_SelectAll.Checked;
+                item.Cells[isSelectedDataGridViewCheckBoxColumn.Name].Value = check_SelectAll.Checked;
             }
         }
 
@@ -107,9 +117,9 @@ namespace RegistServe
             }
             foreach (DataGridViewRow item in dataGridView.Rows)
             {
-                if (!(bool)item.Cells[dLastRegistState.Name].Value)
+                if (!(bool)item.Cells[lastRegistStateDataGridViewCheckBoxColumn.Name].Value)
                 {
-                    item.Cells[dSelect.Name].Value = check_SelectFailed.Checked;
+                    item.Cells[isSelectedDataGridViewCheckBoxColumn.Name].Value = check_SelectFailed.Checked;
                 }
             }
         }
@@ -132,9 +142,9 @@ namespace RegistServe
 
             foreach (DataGridViewRow item in dataGridView.Rows)
             {
-                if ((bool)item.Cells[dSelect.Name].Value)
+                if ((bool)item.Cells[isSelectedDataGridViewCheckBoxColumn.Name].Value)
                 {
-                    selectUsernames.Add(item.Cells[dUsername.Name].Value.ToString());
+                    selectUsernames.Add(item.Cells[usernameDataGridViewTextBoxColumn.Name].Value.ToString());
 
                     flag = true;
                 }
@@ -143,7 +153,7 @@ namespace RegistServe
             if (!flag)
             {
                 int selectIndex = dataGridView.CurrentCell.RowIndex;
-                selectUsernames.Add(dataGridView.Rows[selectIndex].Cells[dUsername.Name].Value.ToString());
+                selectUsernames.Add(dataGridView.Rows[selectIndex].Cells[usernameDataGridViewTextBoxColumn.Name].Value.ToString());
             }
 
             FormLogViewer logViewer = new FormLogViewer(selectUsernames.ToArray());
@@ -167,9 +177,9 @@ namespace RegistServe
             //todo:改造foreach，提升性能（experssion）
             foreach (DataGridViewRow item in dataGridView.Rows)
             {
-                if ((bool)item.Cells[dSelect.Name].Value)
+                if ((bool)item.Cells[isSelectedDataGridViewCheckBoxColumn.Name].Value)
                 {
-                    string s = item.Cells[dGUID.Name].Value.ToString();
+                    string s = item.Cells[gUIDDataGridViewTextBoxColumn.Name].Value.ToString();
                     UserInfo selectUserInfo = Program.UnitWork.Find<UserInfo>(p => p.GUID == s).First();
                     MessageBox.Show(Regist(selectUserInfo));
                     flag = true;
@@ -179,7 +189,7 @@ namespace RegistServe
             if (!flag)
             {
                 int selectIndex = dataGridView.CurrentCell.RowIndex;
-                string selectGUID = dataGridView.Rows[selectIndex].Cells[dGUID.Name].Value.ToString();
+                string selectGUID = dataGridView.Rows[selectIndex].Cells[gUIDDataGridViewTextBoxColumn.Name].Value.ToString();
 
                 UserInfo selectUserInfo = Program.UnitWork.Find<UserInfo>(p => p.GUID == selectGUID).First();
                 MessageBox.Show(Regist(selectUserInfo));
@@ -238,9 +248,9 @@ namespace RegistServe
             bool flag = false;
             foreach (DataGridViewRow item in dataGridView.Rows)
             {
-                if ((bool)item.Cells[dSelect.Name].Value)
+                if ((bool)item.Cells[isSelectedDataGridViewCheckBoxColumn.Name].Value)
                 {
-                    string s = item.Cells[dGUID.Name].Value.ToString();
+                    string s = item.Cells[gUIDDataGridViewTextBoxColumn.Name].Value.ToString();
                     UserInfo selectUserInfo = Program.UnitWork.Find<UserInfo>(p => p.GUID == s).First();
                     Delete(selectUserInfo);
 
@@ -251,7 +261,7 @@ namespace RegistServe
             if (!flag)
             {
                 int selectIndex = dataGridView.CurrentCell.RowIndex;
-                string selectGUID = dataGridView.Rows[selectIndex].Cells[dGUID.Name].Value.ToString();
+                string selectGUID = dataGridView.Rows[selectIndex].Cells[gUIDDataGridViewTextBoxColumn.Name].Value.ToString();
 
                 UserInfo selectUserInfo = Program.UnitWork.Find<UserInfo>(p => p.GUID == selectGUID).First();
                 Delete(selectUserInfo);
@@ -285,9 +295,9 @@ namespace RegistServe
             bool flag = false;
             foreach (DataGridViewRow item in dataGridView.Rows)
             {
-                if ((bool)item.Cells[dSelect.Name].Value)
+                if ((bool)item.Cells[isSelectedDataGridViewCheckBoxColumn.Name].Value)
                 {
-                    string s = item.Cells[dGUID.Name].Value.ToString();
+                    string s = item.Cells[gUIDDataGridViewTextBoxColumn.Name].Value.ToString();
                     UserInfo selectUserInfo = Program.UnitWork.Find<UserInfo>(p => p.GUID == s).First();
                     Update(selectUserInfo);
 
@@ -298,7 +308,7 @@ namespace RegistServe
             if (!flag)
             {
                 int selectIndex = dataGridView.CurrentCell.RowIndex;
-                string selectGUID = dataGridView.Rows[selectIndex].Cells[dGUID.Name].Value.ToString();
+                string selectGUID = dataGridView.Rows[selectIndex].Cells[gUIDDataGridViewTextBoxColumn.Name].Value.ToString();
 
                 UserInfo selectUserInfo = Program.UnitWork.Find<UserInfo>(p => p.GUID == selectGUID).First();
                 Update(selectUserInfo);
@@ -345,7 +355,7 @@ namespace RegistServe
                 //设置执行一次（false）还是一直执行(true)
                 AutoReset = true,
                 //设置是否执行System.Timers.Timer.Elapsed事件
-                Enabled = check_AlarmEnable.Checked
+                Enabled = check_TimerEnable.Checked
             };
             //绑定Elapsed事件
             timer.Elapsed += new System.Timers.ElapsedEventHandler(Timer_Elapsed);
@@ -432,6 +442,7 @@ $@"{log.Name}
                     builder.AppendLine($"糟糕的一天，没有人填报成功(T_T)");
                 }
 
+                //todo:拆分用户和管理员邮件日志
                 //发送日报到邮箱
                 EmailSender emailSender = new EmailSender("smtp.163.com:25", "c1325242398@163.com", "WWRURIXBPYGJSGEO", "c1325242398@163.com");
                 emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), "1325242398@qq.com");
@@ -442,15 +453,24 @@ $@"{log.Name}
                 }));
             }
         }
-
+        
         /// <summary>
-        /// 开启定时填报
+        /// 绑定复选框和Timer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void check_AlarmEnable_CheckedChanged(object sender, EventArgs e)
+        private void check_TimerEnable_CheckedChanged(object sender, EventArgs e)
         {
-            timer.Enabled = check_AlarmEnable.Checked;
+            timer.Enabled = check_TimerEnable.Checked;
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //同步配置
+            Program.Setting.TimerConfig.Hour = (ushort)this.numeric_Hour.Value;
+            Program.Setting.TimerConfig.Minute = (ushort)this.numeric_Minute.Value;
+            Program.Setting.TimerConfig.Enable = this.check_TimerEnable.Checked;
+
         }
     }
 }

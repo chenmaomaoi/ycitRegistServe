@@ -28,22 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btn_ViewLogs = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.dSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dGUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dCsrftoken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dSessionid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dLastRegistTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dLastRegistState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dQQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dRemark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isSelectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.gUIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.csrftokenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sessionidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastRegistTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastRegistStateDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.remarkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enableEmailNotificationDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.userInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.group_User = new System.Windows.Forms.GroupBox();
             this.btn_UpdateSelect = new System.Windows.Forms.Button();
             this.check_SelectAll = new System.Windows.Forms.CheckBox();
@@ -51,15 +54,16 @@
             this.btn_RegistSelect = new System.Windows.Forms.Button();
             this.check_SelectFailed = new System.Windows.Forms.CheckBox();
             this.btn_ViewAllLogs = new System.Windows.Forms.Button();
-            this.group_Alarm = new System.Windows.Forms.GroupBox();
+            this.group_Timer = new System.Windows.Forms.GroupBox();
             this.numeric_Hour = new System.Windows.Forms.NumericUpDown();
             this.numeric_Minute = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.check_AlarmEnable = new System.Windows.Forms.CheckBox();
+            this.check_TimerEnable = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoBindingSource)).BeginInit();
             this.group_User.SuspendLayout();
-            this.group_Alarm.SuspendLayout();
+            this.group_Timer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Hour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).BeginInit();
             this.SuspendLayout();
@@ -89,21 +93,24 @@
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToOrderColumns = true;
+            this.dataGridView.AutoGenerateColumns = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dSelect,
-            this.dGUID,
-            this.dName,
-            this.dUsername,
-            this.dPassword,
-            this.dCsrftoken,
-            this.dSessionid,
-            this.dStartTime,
-            this.dEndTime,
-            this.dLastRegistTime,
-            this.dLastRegistState,
-            this.dQQ,
-            this.dRemark});
+            this.isSelectedDataGridViewCheckBoxColumn,
+            this.gUIDDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.usernameDataGridViewTextBoxColumn,
+            this.passwordDataGridViewTextBoxColumn,
+            this.csrftokenDataGridViewTextBoxColumn,
+            this.sessionidDataGridViewTextBoxColumn,
+            this.startTimeDataGridViewTextBoxColumn,
+            this.endTimeDataGridViewTextBoxColumn,
+            this.lastRegistTimeDataGridViewTextBoxColumn,
+            this.lastRegistStateDataGridViewCheckBoxColumn,
+            this.remarkDataGridViewTextBoxColumn,
+            this.emailDataGridViewTextBoxColumn,
+            this.enableEmailNotificationDataGridViewCheckBoxColumn});
+            this.dataGridView.DataSource = this.userInfoBindingSource;
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 62;
@@ -111,116 +118,121 @@
             this.dataGridView.Size = new System.Drawing.Size(1525, 799);
             this.dataGridView.TabIndex = 4;
             // 
-            // dSelect
+            // isSelectedDataGridViewCheckBoxColumn
             // 
-            this.dSelect.HeaderText = " ";
-            this.dSelect.MinimumWidth = 8;
-            this.dSelect.Name = "dSelect";
-            this.dSelect.Width = 50;
+            this.isSelectedDataGridViewCheckBoxColumn.DataPropertyName = "IsSelected";
+            this.isSelectedDataGridViewCheckBoxColumn.HeaderText = "IsSelected";
+            this.isSelectedDataGridViewCheckBoxColumn.MinimumWidth = 8;
+            this.isSelectedDataGridViewCheckBoxColumn.Name = "isSelectedDataGridViewCheckBoxColumn";
+            this.isSelectedDataGridViewCheckBoxColumn.Width = 150;
             // 
-            // dGUID
+            // gUIDDataGridViewTextBoxColumn
             // 
-            this.dGUID.HeaderText = "GUID";
-            this.dGUID.MinimumWidth = 8;
-            this.dGUID.Name = "dGUID";
-            this.dGUID.ReadOnly = true;
-            this.dGUID.Visible = false;
-            this.dGUID.Width = 8;
+            this.gUIDDataGridViewTextBoxColumn.DataPropertyName = "GUID";
+            this.gUIDDataGridViewTextBoxColumn.HeaderText = "GUID";
+            this.gUIDDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.gUIDDataGridViewTextBoxColumn.Name = "gUIDDataGridViewTextBoxColumn";
+            this.gUIDDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dName
+            // nameDataGridViewTextBoxColumn
             // 
-            this.dName.HeaderText = "姓名";
-            this.dName.MinimumWidth = 8;
-            this.dName.Name = "dName";
-            this.dName.ReadOnly = true;
-            this.dName.Width = 150;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dUsername
+            // usernameDataGridViewTextBoxColumn
             // 
-            this.dUsername.HeaderText = "账号";
-            this.dUsername.MinimumWidth = 8;
-            this.dUsername.Name = "dUsername";
-            this.dUsername.ReadOnly = true;
-            this.dUsername.Visible = false;
-            this.dUsername.Width = 150;
+            this.usernameDataGridViewTextBoxColumn.DataPropertyName = "Username";
+            this.usernameDataGridViewTextBoxColumn.HeaderText = "Username";
+            this.usernameDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
+            this.usernameDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dPassword
+            // passwordDataGridViewTextBoxColumn
             // 
-            this.dPassword.HeaderText = "密码";
-            this.dPassword.MinimumWidth = 8;
-            this.dPassword.Name = "dPassword";
-            this.dPassword.ReadOnly = true;
-            this.dPassword.Visible = false;
-            this.dPassword.Width = 150;
+            this.passwordDataGridViewTextBoxColumn.DataPropertyName = "Password";
+            this.passwordDataGridViewTextBoxColumn.HeaderText = "Password";
+            this.passwordDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.passwordDataGridViewTextBoxColumn.Name = "passwordDataGridViewTextBoxColumn";
+            this.passwordDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dCsrftoken
+            // csrftokenDataGridViewTextBoxColumn
             // 
-            this.dCsrftoken.HeaderText = "Csrftoken";
-            this.dCsrftoken.MinimumWidth = 8;
-            this.dCsrftoken.Name = "dCsrftoken";
-            this.dCsrftoken.ReadOnly = true;
-            this.dCsrftoken.Visible = false;
-            this.dCsrftoken.Width = 150;
+            this.csrftokenDataGridViewTextBoxColumn.DataPropertyName = "Csrftoken";
+            this.csrftokenDataGridViewTextBoxColumn.HeaderText = "Csrftoken";
+            this.csrftokenDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.csrftokenDataGridViewTextBoxColumn.Name = "csrftokenDataGridViewTextBoxColumn";
+            this.csrftokenDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dSessionid
+            // sessionidDataGridViewTextBoxColumn
             // 
-            this.dSessionid.HeaderText = "Sessionid";
-            this.dSessionid.MinimumWidth = 8;
-            this.dSessionid.Name = "dSessionid";
-            this.dSessionid.ReadOnly = true;
-            this.dSessionid.Visible = false;
-            this.dSessionid.Width = 150;
+            this.sessionidDataGridViewTextBoxColumn.DataPropertyName = "Sessionid";
+            this.sessionidDataGridViewTextBoxColumn.HeaderText = "Sessionid";
+            this.sessionidDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.sessionidDataGridViewTextBoxColumn.Name = "sessionidDataGridViewTextBoxColumn";
+            this.sessionidDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dStartTime
+            // startTimeDataGridViewTextBoxColumn
             // 
-            this.dStartTime.HeaderText = "开始时间";
-            this.dStartTime.MinimumWidth = 8;
-            this.dStartTime.Name = "dStartTime";
-            this.dStartTime.ReadOnly = true;
-            this.dStartTime.Visible = false;
-            this.dStartTime.Width = 150;
+            this.startTimeDataGridViewTextBoxColumn.DataPropertyName = "StartTime";
+            this.startTimeDataGridViewTextBoxColumn.HeaderText = "StartTime";
+            this.startTimeDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.startTimeDataGridViewTextBoxColumn.Name = "startTimeDataGridViewTextBoxColumn";
+            this.startTimeDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dEndTime
+            // endTimeDataGridViewTextBoxColumn
             // 
-            this.dEndTime.HeaderText = "结束时间";
-            this.dEndTime.MinimumWidth = 8;
-            this.dEndTime.Name = "dEndTime";
-            this.dEndTime.ReadOnly = true;
-            this.dEndTime.Width = 150;
+            this.endTimeDataGridViewTextBoxColumn.DataPropertyName = "EndTime";
+            this.endTimeDataGridViewTextBoxColumn.HeaderText = "EndTime";
+            this.endTimeDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.endTimeDataGridViewTextBoxColumn.Name = "endTimeDataGridViewTextBoxColumn";
+            this.endTimeDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dLastRegistTime
+            // lastRegistTimeDataGridViewTextBoxColumn
             // 
-            this.dLastRegistTime.HeaderText = "最后一次填报日期";
-            this.dLastRegistTime.MinimumWidth = 8;
-            this.dLastRegistTime.Name = "dLastRegistTime";
-            this.dLastRegistTime.ReadOnly = true;
-            this.dLastRegistTime.Width = 150;
+            this.lastRegistTimeDataGridViewTextBoxColumn.DataPropertyName = "LastRegistTime";
+            this.lastRegistTimeDataGridViewTextBoxColumn.HeaderText = "LastRegistTime";
+            this.lastRegistTimeDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.lastRegistTimeDataGridViewTextBoxColumn.Name = "lastRegistTimeDataGridViewTextBoxColumn";
+            this.lastRegistTimeDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dLastRegistState
+            // lastRegistStateDataGridViewCheckBoxColumn
             // 
-            this.dLastRegistState.HeaderText = "最后一次填报状态";
-            this.dLastRegistState.MinimumWidth = 8;
-            this.dLastRegistState.Name = "dLastRegistState";
-            this.dLastRegistState.ReadOnly = true;
-            this.dLastRegistState.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dLastRegistState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dLastRegistState.Width = 150;
+            this.lastRegistStateDataGridViewCheckBoxColumn.DataPropertyName = "LastRegistState";
+            this.lastRegistStateDataGridViewCheckBoxColumn.HeaderText = "LastRegistState";
+            this.lastRegistStateDataGridViewCheckBoxColumn.MinimumWidth = 8;
+            this.lastRegistStateDataGridViewCheckBoxColumn.Name = "lastRegistStateDataGridViewCheckBoxColumn";
+            this.lastRegistStateDataGridViewCheckBoxColumn.Width = 150;
             // 
-            // dQQ
+            // remarkDataGridViewTextBoxColumn
             // 
-            this.dQQ.HeaderText = "QQ";
-            this.dQQ.MinimumWidth = 8;
-            this.dQQ.Name = "dQQ";
-            this.dQQ.ReadOnly = true;
-            this.dQQ.Width = 150;
+            this.remarkDataGridViewTextBoxColumn.DataPropertyName = "Remark";
+            this.remarkDataGridViewTextBoxColumn.HeaderText = "Remark";
+            this.remarkDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.remarkDataGridViewTextBoxColumn.Name = "remarkDataGridViewTextBoxColumn";
+            this.remarkDataGridViewTextBoxColumn.Width = 150;
             // 
-            // dRemark
+            // emailDataGridViewTextBoxColumn
             // 
-            this.dRemark.HeaderText = "备注";
-            this.dRemark.MinimumWidth = 8;
-            this.dRemark.Name = "dRemark";
-            this.dRemark.ReadOnly = true;
-            this.dRemark.Width = 150;
+            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            this.emailDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            this.emailDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // enableEmailNotificationDataGridViewCheckBoxColumn
+            // 
+            this.enableEmailNotificationDataGridViewCheckBoxColumn.DataPropertyName = "EnableEmailNotification";
+            this.enableEmailNotificationDataGridViewCheckBoxColumn.HeaderText = "EnableEmailNotification";
+            this.enableEmailNotificationDataGridViewCheckBoxColumn.MinimumWidth = 8;
+            this.enableEmailNotificationDataGridViewCheckBoxColumn.Name = "enableEmailNotificationDataGridViewCheckBoxColumn";
+            this.enableEmailNotificationDataGridViewCheckBoxColumn.Width = 150;
+            // 
+            // userInfoBindingSource
+            // 
+            this.userInfoBindingSource.DataSource = typeof(RegistServe.DB.Domain.UserInfo);
             // 
             // group_User
             // 
@@ -300,19 +312,19 @@
             this.btn_ViewAllLogs.UseVisualStyleBackColor = true;
             this.btn_ViewAllLogs.Click += new System.EventHandler(this.btn_ViewAllLogs_Click);
             // 
-            // group_Alarm
+            // group_Timer
             // 
-            this.group_Alarm.Controls.Add(this.numeric_Hour);
-            this.group_Alarm.Controls.Add(this.numeric_Minute);
-            this.group_Alarm.Controls.Add(this.label2);
-            this.group_Alarm.Controls.Add(this.check_AlarmEnable);
-            this.group_Alarm.Controls.Add(this.label1);
-            this.group_Alarm.Location = new System.Drawing.Point(1543, 301);
-            this.group_Alarm.Name = "group_Alarm";
-            this.group_Alarm.Size = new System.Drawing.Size(127, 127);
-            this.group_Alarm.TabIndex = 8;
-            this.group_Alarm.TabStop = false;
-            this.group_Alarm.Text = "定时填报";
+            this.group_Timer.Controls.Add(this.numeric_Hour);
+            this.group_Timer.Controls.Add(this.numeric_Minute);
+            this.group_Timer.Controls.Add(this.label2);
+            this.group_Timer.Controls.Add(this.check_TimerEnable);
+            this.group_Timer.Controls.Add(this.label1);
+            this.group_Timer.Location = new System.Drawing.Point(1543, 301);
+            this.group_Timer.Name = "group_Timer";
+            this.group_Timer.Size = new System.Drawing.Size(127, 127);
+            this.group_Timer.TabIndex = 8;
+            this.group_Timer.TabStop = false;
+            this.group_Timer.Text = "定时填报";
             // 
             // numeric_Hour
             // 
@@ -347,16 +359,16 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "分：";
             // 
-            // check_AlarmEnable
+            // check_TimerEnable
             // 
-            this.check_AlarmEnable.AutoSize = true;
-            this.check_AlarmEnable.Location = new System.Drawing.Point(13, 95);
-            this.check_AlarmEnable.Name = "check_AlarmEnable";
-            this.check_AlarmEnable.Size = new System.Drawing.Size(70, 22);
-            this.check_AlarmEnable.TabIndex = 7;
-            this.check_AlarmEnable.Text = "启用";
-            this.check_AlarmEnable.UseVisualStyleBackColor = true;
-            this.check_AlarmEnable.CheckedChanged += new System.EventHandler(this.check_AlarmEnable_CheckedChanged);
+            this.check_TimerEnable.AutoSize = true;
+            this.check_TimerEnable.Location = new System.Drawing.Point(13, 95);
+            this.check_TimerEnable.Name = "check_TimerEnable";
+            this.check_TimerEnable.Size = new System.Drawing.Size(70, 22);
+            this.check_TimerEnable.TabIndex = 7;
+            this.check_TimerEnable.Text = "启用";
+            this.check_TimerEnable.UseVisualStyleBackColor = true;
+            this.check_TimerEnable.CheckedChanged += new System.EventHandler(this.check_TimerEnable_CheckedChanged);
             // 
             // label1
             // 
@@ -373,17 +385,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1678, 823);
             this.Controls.Add(this.btn_ViewAllLogs);
-            this.Controls.Add(this.group_Alarm);
+            this.Controls.Add(this.group_Timer);
             this.Controls.Add(this.group_User);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormMain";
             this.Text = "FormMain";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoBindingSource)).EndInit();
             this.group_User.ResumeLayout(false);
             this.group_User.PerformLayout();
-            this.group_Alarm.ResumeLayout(false);
-            this.group_Alarm.PerformLayout();
+            this.group_Timer.ResumeLayout(false);
+            this.group_Timer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Hour)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).EndInit();
             this.ResumeLayout(false);
@@ -400,27 +414,29 @@
         private System.Windows.Forms.Button btn_ViewAllLogs;
         private System.Windows.Forms.CheckBox check_SelectFailed;
         private System.Windows.Forms.CheckBox check_SelectAll;
-        private System.Windows.Forms.GroupBox group_Alarm;
+        private System.Windows.Forms.GroupBox group_Timer;
         private System.Windows.Forms.Button btn_UpdateSelect;
         private System.Windows.Forms.Button btn_DelectSelect;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dSelect;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dGUID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dUsername;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dPassword;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dCsrftoken;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dSessionid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dStartTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dEndTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dLastRegistTime;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dLastRegistState;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dQQ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dRemark;
         private System.Windows.Forms.NumericUpDown numeric_Minute;
         private System.Windows.Forms.NumericUpDown numeric_Hour;
-        private System.Windows.Forms.CheckBox check_AlarmEnable;
+        private System.Windows.Forms.CheckBox check_TimerEnable;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.BindingSource userInfoBindingSource;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isSelectedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gUIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn csrftokenDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sessionidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastRegistTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn lastRegistStateDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remarkDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn enableEmailNotificationDataGridViewCheckBoxColumn;
     }
 }
 

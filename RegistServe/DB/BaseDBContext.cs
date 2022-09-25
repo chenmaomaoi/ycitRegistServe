@@ -6,7 +6,7 @@ namespace RegistServe.DB
 {
     public class BaseDBContext : DbContext
     {
-        public BaseDBContext() : base("DataBase") { }
+        public BaseDBContext() : base("UserData") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

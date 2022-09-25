@@ -39,10 +39,9 @@ namespace RegistServe
                 this.text_Name.Text = this.userInfo.Name;
                 this.text_Csrftoken.Text = this.userInfo.Csrftoken;
                 this.text_Sessionid.Text = this.userInfo.Sessionid;
-
-                this.text_QQ.Text = this.userInfo.QQ;
                 this.text_Remark.Text = this.userInfo.Remark;
-
+                this.text_Email.Text = this.userInfo.Email;
+                this.chk_EnableEmailNotification.Checked = this.userInfo.EnableEmailNotification;
                 this.dateTimePicker_StartTime.Value = this.userInfo.StartTime;
                 this.dateTimePicker_EndTime.Value = this.userInfo.EndTime;
                 this.dateTimePicker_LastRegistTime.Value = this.userInfo.LastRegistTime;
@@ -83,8 +82,9 @@ namespace RegistServe
             userInfo.Name = this.text_Name.Text;
             userInfo.Csrftoken = this.text_Csrftoken.Text;
             userInfo.Sessionid = this.text_Sessionid.Text;
-            userInfo.QQ = this.text_QQ.Text;
             userInfo.Remark = this.text_Remark.Text;
+            userInfo.Email = this.text_Email.Text;
+            userInfo.EnableEmailNotification = this.chk_EnableEmailNotification.Checked;
             userInfo.StartTime = this.dateTimePicker_StartTime.Value;
             userInfo.EndTime = this.dateTimePicker_EndTime.Value;
 
