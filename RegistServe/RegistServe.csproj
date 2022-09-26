@@ -121,6 +121,12 @@
     <Compile Include="FormAddAndUpdate.Designer.cs">
       <DependentUpon>FormAddAndUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAdminEmailSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdminEmailSetting.Designer.cs">
+      <DependentUpon>FormAdminEmailSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     <Compile Include="Utils\EmailSender.cs" />
     <EmbeddedResource Include="FormAddAndUpdate.resx">
       <DependentUpon>FormAddAndUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAdminEmailSetting.resx">
+      <DependentUpon>FormAdminEmailSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogViewer.resx">
       <DependentUpon>FormLogViewer.cs</DependentUpon>

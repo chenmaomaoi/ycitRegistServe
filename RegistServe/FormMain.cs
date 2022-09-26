@@ -386,6 +386,8 @@ namespace RegistServe
                 {
                     foreach (UserInfo userInfo in userInfos)
                     {
+                        //todo:按照配置填报
+                        //todo:发送日志（用户）
                         Regist(userInfo);
                     }
                     Program.UnitWork.Save();
@@ -442,9 +444,8 @@ $@"{log.Name}
                     builder.AppendLine($"糟糕的一天，没有人填报成功(T_T)");
                 }
 
-                //todo:拆分用户和管理员邮件日志
-                //发送日报到邮箱
-                EmailSender emailSender = new EmailSender("smtp.163.com:25", "c1325242398@163.com", "WWRURIXBPYGJSGEO", "c1325242398@163.com");
+                //todo:发送日志（管理员）
+                EmailSender emailSender = new EmailSender("smtp.163.com:25", "c1325242398@163.com", "WWRURIXBPYGJSGEO");
                 emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), "1325242398@qq.com");
 
                 this.Invoke(new EventHandler(delegate
@@ -471,6 +472,11 @@ $@"{log.Name}
             Program.Setting.TimerConfig.Minute = (ushort)this.numeric_Minute.Value;
             Program.Setting.TimerConfig.Enable = this.check_TimerEnable.Checked;
 
+        }
+
+        private void btn_AdminEmailSetting_Click(object sender, EventArgs e)
+        {
+            new FormAdminEmailSetting().ShowDialog();
         }
     }
 }

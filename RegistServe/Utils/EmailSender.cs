@@ -16,7 +16,6 @@ namespace RegistServe.Utils
 
         private static string UserName;
         private static string Password;
-        private static string From;
         private static string To;
 
         /// <summary>
@@ -25,14 +24,12 @@ namespace RegistServe.Utils
         /// <param name="serverAndPort">服务器地址，主机名:端口</param>
         /// <param name="userName">发件人邮箱用户名</param>
         /// <param name="password">发件人邮箱密码（授权码）</param>
-        /// <param name="from">发件人地址</param>
         /// <param name="to">收件人地址，多个用“;”隔开</param>
-        public EmailSender(string serverAndPort, string userName, string password, string from, string to = null)
+        public EmailSender(string serverAndPort, string userName, string password, string to = null)
         {
             ServerAddress = serverAndPort;
             UserName = userName;
             Password = password;
-            From = from;
             AddTo(to);
         }
 
@@ -92,7 +89,7 @@ namespace RegistServe.Utils
             MailMessage msg = new MailMessage();
             msg.Subject = subject;
             msg.Body = body;
-            msg.From = new MailAddress(From);
+            msg.From = new MailAddress(UserName);
             if (string.IsNullOrEmpty(to))
             {
                 // 如果未指定收件人，则为To属性值（发送给所有人）

@@ -51,7 +51,7 @@
             this.dLogLevel,
             this.dTime,
             this.dMessage});
-            this.dataGridView.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView.Location = new System.Drawing.Point(6, 6);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersWidth = 62;
@@ -70,53 +70,60 @@
             // 
             // dUsername
             // 
+            this.dUsername.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dUsername.HeaderText = "账号";
             this.dUsername.MinimumWidth = 8;
             this.dUsername.Name = "dUsername";
             this.dUsername.ReadOnly = true;
-            this.dUsername.Width = 150;
+            this.dUsername.Width = 80;
             // 
             // dName
             // 
+            this.dName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dName.HeaderText = "姓名";
             this.dName.MinimumWidth = 8;
             this.dName.Name = "dName";
             this.dName.ReadOnly = true;
-            this.dName.Width = 150;
+            this.dName.Width = 80;
             // 
             // dLogLevel
             // 
+            this.dLogLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dLogLevel.HeaderText = "日志级别";
             this.dLogLevel.MinimumWidth = 8;
             this.dLogLevel.Name = "dLogLevel";
             this.dLogLevel.ReadOnly = true;
-            this.dLogLevel.Width = 150;
+            this.dLogLevel.Width = 116;
             // 
             // dTime
             // 
+            this.dTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dTime.HeaderText = "时间";
             this.dTime.MinimumWidth = 8;
             this.dTime.Name = "dTime";
             this.dTime.ReadOnly = true;
-            this.dTime.Width = 150;
+            this.dTime.Width = 80;
             // 
             // dMessage
             // 
+            this.dMessage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dMessage.HeaderText = "消息";
             this.dMessage.MinimumWidth = 8;
             this.dMessage.Name = "dMessage";
             this.dMessage.ReadOnly = true;
-            this.dMessage.Width = 150;
             // 
             // FormLogViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1445, 809);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1549, 879);
             this.Controls.Add(this.dataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "FormLogViewer";
+            this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormLogViewer";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

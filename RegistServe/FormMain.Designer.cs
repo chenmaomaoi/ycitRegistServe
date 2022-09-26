@@ -45,6 +45,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.check_TimerEnable = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn_AdminEmailSetting = new System.Windows.Forms.Button();
             this.isSelectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.gUIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,14 +114,15 @@
             this.dataGridView.DataSource = this.userInfoBindingSource;
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersWidth = 62;
             this.dataGridView.RowTemplate.Height = 30;
-            this.dataGridView.Size = new System.Drawing.Size(1525, 799);
+            this.dataGridView.Size = new System.Drawing.Size(1397, 545);
             this.dataGridView.TabIndex = 4;
             // 
             // group_User
             // 
+            this.group_User.AutoSize = true;
+            this.group_User.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.group_User.Controls.Add(this.btn_UpdateSelect);
             this.group_User.Controls.Add(this.btnAdd);
             this.group_User.Controls.Add(this.btn_ViewLogs);
@@ -128,9 +130,9 @@
             this.group_User.Controls.Add(this.btn_DelectSelect);
             this.group_User.Controls.Add(this.btn_RegistSelect);
             this.group_User.Controls.Add(this.check_SelectFailed);
-            this.group_User.Location = new System.Drawing.Point(1543, 12);
+            this.group_User.Location = new System.Drawing.Point(1415, 12);
             this.group_User.Name = "group_User";
-            this.group_User.Size = new System.Drawing.Size(127, 283);
+            this.group_User.Size = new System.Drawing.Size(118, 299);
             this.group_User.TabIndex = 5;
             this.group_User.TabStop = false;
             this.group_User.Text = "用户管理";
@@ -189,7 +191,7 @@
             // 
             // btn_ViewAllLogs
             // 
-            this.btn_ViewAllLogs.Location = new System.Drawing.Point(1549, 434);
+            this.btn_ViewAllLogs.Location = new System.Drawing.Point(1427, 506);
             this.btn_ViewAllLogs.Name = "btn_ViewAllLogs";
             this.btn_ViewAllLogs.Size = new System.Drawing.Size(106, 33);
             this.btn_ViewAllLogs.TabIndex = 3;
@@ -199,21 +201,23 @@
             // 
             // group_Timer
             // 
+            this.group_Timer.AutoSize = true;
+            this.group_Timer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.group_Timer.Controls.Add(this.numeric_Hour);
             this.group_Timer.Controls.Add(this.numeric_Minute);
             this.group_Timer.Controls.Add(this.label2);
             this.group_Timer.Controls.Add(this.check_TimerEnable);
             this.group_Timer.Controls.Add(this.label1);
-            this.group_Timer.Location = new System.Drawing.Point(1543, 301);
+            this.group_Timer.Location = new System.Drawing.Point(1415, 317);
             this.group_Timer.Name = "group_Timer";
-            this.group_Timer.Size = new System.Drawing.Size(127, 127);
+            this.group_Timer.Size = new System.Drawing.Size(118, 144);
             this.group_Timer.TabIndex = 8;
             this.group_Timer.TabStop = false;
             this.group_Timer.Text = "定时填报";
             // 
             // numeric_Hour
             // 
-            this.numeric_Hour.Location = new System.Drawing.Point(60, 27);
+            this.numeric_Hour.Location = new System.Drawing.Point(51, 27);
             this.numeric_Hour.Maximum = new decimal(new int[] {
             23,
             0,
@@ -225,7 +229,7 @@
             // 
             // numeric_Minute
             // 
-            this.numeric_Minute.Location = new System.Drawing.Point(60, 61);
+            this.numeric_Minute.Location = new System.Drawing.Point(51, 61);
             this.numeric_Minute.Maximum = new decimal(new int[] {
             59,
             0,
@@ -264,6 +268,16 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "时：";
             // 
+            // btn_AdminEmailSetting
+            // 
+            this.btn_AdminEmailSetting.Location = new System.Drawing.Point(1427, 467);
+            this.btn_AdminEmailSetting.Name = "btn_AdminEmailSetting";
+            this.btn_AdminEmailSetting.Size = new System.Drawing.Size(106, 33);
+            this.btn_AdminEmailSetting.TabIndex = 9;
+            this.btn_AdminEmailSetting.Text = "邮件设置";
+            this.btn_AdminEmailSetting.UseVisualStyleBackColor = true;
+            this.btn_AdminEmailSetting.Click += new System.EventHandler(this.btn_AdminEmailSetting_Click);
+            // 
             // isSelectedDataGridViewCheckBoxColumn
             // 
             this.isSelectedDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -271,7 +285,6 @@
             this.isSelectedDataGridViewCheckBoxColumn.HeaderText = "";
             this.isSelectedDataGridViewCheckBoxColumn.MinimumWidth = 8;
             this.isSelectedDataGridViewCheckBoxColumn.Name = "isSelectedDataGridViewCheckBoxColumn";
-            this.isSelectedDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isSelectedDataGridViewCheckBoxColumn.Width = 8;
             // 
             // gUIDDataGridViewTextBoxColumn
@@ -415,12 +428,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1678, 823);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1576, 668);
+            this.Controls.Add(this.btn_AdminEmailSetting);
             this.Controls.Add(this.btn_ViewAllLogs);
             this.Controls.Add(this.group_Timer);
             this.Controls.Add(this.group_User);
             this.Controls.Add(this.dataGridView);
+            this.MaximizeBox = false;
             this.Name = "FormMain";
+            this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "FormMain";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -433,6 +451,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Minute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userInfoBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -455,6 +474,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource userInfoBindingSource;
+        private System.Windows.Forms.Button btn_AdminEmailSetting;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isSelectedDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gUIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;

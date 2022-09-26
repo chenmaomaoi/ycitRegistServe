@@ -38,7 +38,7 @@ namespace Test
             //InitTimer();
 
             string server = "smtp.163.com:25";
-            EmailSender emailSender = new EmailSender(server, "c1325242398@163.com", "WWRURIXBPYGJSGEO", "c1325242398@163.com");
+            EmailSender emailSender = new EmailSender(server, "c1325242398@163.com", "WWRURIXBPYGJSGEO");
 
             emailSender.Send("Test", "这是测试正文", "1325242398@qq.com");
 

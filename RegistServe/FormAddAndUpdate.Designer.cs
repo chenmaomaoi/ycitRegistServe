@@ -67,6 +67,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.AutoSize = true;
+            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.text_GUID);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.text_Sessionid);
@@ -82,7 +84,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(388, 235);
+            this.groupBox1.Size = new System.Drawing.Size(379, 252);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "账号信息";
@@ -107,7 +109,7 @@
             // text_Sessionid
             // 
             this.text_Sessionid.Enabled = false;
-            this.text_Sessionid.Location = new System.Drawing.Point(110, 192);
+            this.text_Sessionid.Location = new System.Drawing.Point(110, 197);
             this.text_Sessionid.Name = "text_Sessionid";
             this.text_Sessionid.Size = new System.Drawing.Size(263, 28);
             this.text_Sessionid.TabIndex = 10;
@@ -115,7 +117,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 195);
+            this.label6.Location = new System.Drawing.Point(6, 200);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 18);
             this.label6.TabIndex = 9;
@@ -124,7 +126,7 @@
             // text_Csrftoken
             // 
             this.text_Csrftoken.Enabled = false;
-            this.text_Csrftoken.Location = new System.Drawing.Point(110, 158);
+            this.text_Csrftoken.Location = new System.Drawing.Point(110, 163);
             this.text_Csrftoken.Name = "text_Csrftoken";
             this.text_Csrftoken.Size = new System.Drawing.Size(263, 28);
             this.text_Csrftoken.TabIndex = 8;
@@ -132,7 +134,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 161);
+            this.label5.Location = new System.Drawing.Point(6, 166);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 18);
             this.label5.TabIndex = 7;
@@ -159,7 +161,7 @@
             // 
             this.btn_Login.Location = new System.Drawing.Point(298, 124);
             this.btn_Login.Name = "btn_Login";
-            this.btn_Login.Size = new System.Drawing.Size(75, 28);
+            this.btn_Login.Size = new System.Drawing.Size(75, 33);
             this.btn_Login.TabIndex = 1;
             this.btn_Login.Text = "登录";
             this.btn_Login.UseVisualStyleBackColor = true;
@@ -199,7 +201,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(244, 562);
+            this.btn_Save.Location = new System.Drawing.Point(235, 610);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(75, 33);
             this.btn_Save.TabIndex = 2;
@@ -209,7 +211,7 @@
             // 
             // btn_Cancer
             // 
-            this.btn_Cancer.Location = new System.Drawing.Point(325, 562);
+            this.btn_Cancer.Location = new System.Drawing.Point(316, 610);
             this.btn_Cancer.Name = "btn_Cancer";
             this.btn_Cancer.Size = new System.Drawing.Size(75, 33);
             this.btn_Cancer.TabIndex = 3;
@@ -219,14 +221,16 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.AutoSize = true;
+            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox2.Controls.Add(this.chk_EnableEmailNotification);
             this.groupBox2.Controls.Add(this.text_Remark);
             this.groupBox2.Controls.Add(this.text_Email);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(12, 253);
+            this.groupBox2.Location = new System.Drawing.Point(12, 270);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(388, 126);
+            this.groupBox2.Size = new System.Drawing.Size(378, 144);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "用户扩展信息";
@@ -275,6 +279,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.AutoSize = true;
             this.groupBox3.Controls.Add(this.text_LastRegistState);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.dateTimePicker_LastRegistTime);
@@ -283,9 +288,9 @@
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.dateTimePicker_StartTime);
             this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Location = new System.Drawing.Point(12, 385);
+            this.groupBox3.Location = new System.Drawing.Point(12, 420);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(388, 171);
+            this.groupBox3.Size = new System.Drawing.Size(379, 184);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "填报系统信息";
@@ -358,7 +363,7 @@
             // 
             // btn_Log
             // 
-            this.btn_Log.Location = new System.Drawing.Point(12, 562);
+            this.btn_Log.Location = new System.Drawing.Point(12, 610);
             this.btn_Log.Name = "btn_Log";
             this.btn_Log.Size = new System.Drawing.Size(75, 33);
             this.btn_Log.TabIndex = 6;
@@ -370,7 +375,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 606);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(453, 700);
             this.Controls.Add(this.btn_Log);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -381,6 +388,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddAndUpdate";
+            this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormAddAndUpdate";
             this.groupBox1.ResumeLayout(false);
@@ -390,6 +398,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

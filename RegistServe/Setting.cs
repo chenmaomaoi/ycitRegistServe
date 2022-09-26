@@ -11,9 +11,15 @@ namespace RegistServe
     /// </summary>
     public class Setting
     {
+        /// <summary>
+        /// 定时填报配置
+        /// </summary>
         public TimerConfig TimerConfig = new TimerConfig();
 
-        //todo:增加管理员邮件设置
+        /// <summary>
+        /// 系统日志邮件配置
+        /// </summary>
+        public SysEmailConfig SysEmailConfig = new SysEmailConfig();
     }
 
     /// <summary>
@@ -24,5 +30,18 @@ namespace RegistServe
         public UInt16 Hour = 7;
         public UInt16 Minute = 0; 
         public bool Enable = true;
+    }
+
+    /// <summary>
+    /// 系统邮件相关
+    /// </summary>
+    public class SysEmailConfig
+    {
+        public string ServerAndPort = "smtp.163.com:25";
+        public string UserName = "";
+        public string Password = "";
+        public string RecvSysLogAddr = "";
+        public bool EnableSysLogEmail = false;
+        public bool EnableEmailNotification = false;
     }
 }
