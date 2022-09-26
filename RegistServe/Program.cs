@@ -34,7 +34,7 @@ namespace RegistServe
             {
                 try
                 {
-                    Setting = JsonConvert.DeserializeObject<Setting>(SETTING_JSON);
+                    Setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(SETTING_JSON));
                 }
                 catch (Exception)
                 {
@@ -51,7 +51,7 @@ namespace RegistServe
         private static void Application_ApplicationExit(object sender, EventArgs e)
         {
             //保存配置文件
-            File.WriteAllText(SETTING_JSON,JsonConvert.SerializeObject(Setting));
+            File.WriteAllText(SETTING_JSON, JsonConvert.SerializeObject(Setting));
         }
     }
 }
