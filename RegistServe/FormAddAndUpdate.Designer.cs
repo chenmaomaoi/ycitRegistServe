@@ -45,6 +45,7 @@
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_Cancer = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chk_EnableEmailNotification = new System.Windows.Forms.CheckBox();
             this.text_Remark = new System.Windows.Forms.TextBox();
             this.text_Email = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.dateTimePicker_StartTime = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.btn_Log = new System.Windows.Forms.Button();
-            this.chk_EnableEmailNotification = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -107,15 +107,15 @@
             // text_Sessionid
             // 
             this.text_Sessionid.Enabled = false;
-            this.text_Sessionid.Location = new System.Drawing.Point(120, 197);
+            this.text_Sessionid.Location = new System.Drawing.Point(110, 192);
             this.text_Sessionid.Name = "text_Sessionid";
-            this.text_Sessionid.Size = new System.Drawing.Size(252, 28);
+            this.text_Sessionid.Size = new System.Drawing.Size(263, 28);
             this.text_Sessionid.TabIndex = 10;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 200);
+            this.label6.Location = new System.Drawing.Point(6, 195);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 18);
             this.label6.TabIndex = 9;
@@ -124,15 +124,15 @@
             // text_Csrftoken
             // 
             this.text_Csrftoken.Enabled = false;
-            this.text_Csrftoken.Location = new System.Drawing.Point(119, 163);
+            this.text_Csrftoken.Location = new System.Drawing.Point(110, 158);
             this.text_Csrftoken.Name = "text_Csrftoken";
-            this.text_Csrftoken.Size = new System.Drawing.Size(253, 28);
+            this.text_Csrftoken.Size = new System.Drawing.Size(263, 28);
             this.text_Csrftoken.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 166);
+            this.label5.Location = new System.Drawing.Point(6, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 18);
             this.label5.TabIndex = 7;
@@ -141,7 +141,7 @@
             // text_Name
             // 
             this.text_Name.Enabled = false;
-            this.text_Name.Location = new System.Drawing.Point(74, 128);
+            this.text_Name.Location = new System.Drawing.Point(74, 124);
             this.text_Name.Name = "text_Name";
             this.text_Name.Size = new System.Drawing.Size(218, 28);
             this.text_Name.TabIndex = 6;
@@ -149,7 +149,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 138);
+            this.label4.Location = new System.Drawing.Point(6, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 18);
             this.label4.TabIndex = 5;
@@ -159,7 +159,7 @@
             // 
             this.btn_Login.Location = new System.Drawing.Point(298, 124);
             this.btn_Login.Name = "btn_Login";
-            this.btn_Login.Size = new System.Drawing.Size(75, 33);
+            this.btn_Login.Size = new System.Drawing.Size(75, 28);
             this.btn_Login.TabIndex = 1;
             this.btn_Login.Text = "登录";
             this.btn_Login.UseVisualStyleBackColor = true;
@@ -230,6 +230,16 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "用户扩展信息";
+            // 
+            // chk_EnableEmailNotification
+            // 
+            this.chk_EnableEmailNotification.AutoSize = true;
+            this.chk_EnableEmailNotification.Location = new System.Drawing.Point(230, 95);
+            this.chk_EnableEmailNotification.Name = "chk_EnableEmailNotification";
+            this.chk_EnableEmailNotification.Size = new System.Drawing.Size(142, 22);
+            this.chk_EnableEmailNotification.TabIndex = 4;
+            this.chk_EnableEmailNotification.Text = "启用邮件提醒";
+            this.chk_EnableEmailNotification.UseVisualStyleBackColor = true;
             // 
             // text_Remark
             // 
@@ -355,16 +365,6 @@
             this.btn_Log.Text = "日志";
             this.btn_Log.UseVisualStyleBackColor = true;
             this.btn_Log.Click += new System.EventHandler(this.btn_Log_Click);
-            // 
-            // chk_EnableEmailNotification
-            // 
-            this.chk_EnableEmailNotification.AutoSize = true;
-            this.chk_EnableEmailNotification.Location = new System.Drawing.Point(230, 95);
-            this.chk_EnableEmailNotification.Name = "chk_EnableEmailNotification";
-            this.chk_EnableEmailNotification.Size = new System.Drawing.Size(142, 22);
-            this.chk_EnableEmailNotification.TabIndex = 4;
-            this.chk_EnableEmailNotification.Text = "启用邮件提醒";
-            this.chk_EnableEmailNotification.UseVisualStyleBackColor = true;
             // 
             // FormAddAndUpdate
             // 

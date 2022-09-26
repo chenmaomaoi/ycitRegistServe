@@ -27,7 +27,7 @@ namespace RegistServe.Utils
         /// <param name="password">发件人邮箱密码（授权码）</param>
         /// <param name="from">发件人地址</param>
         /// <param name="to">收件人地址，多个用“;”隔开</param>
-        public EmailSender(string serverAndPort, string userName, string password, string from, string to)
+        public EmailSender(string serverAndPort, string userName, string password, string from, string to = null)
         {
             ServerAddress = serverAndPort;
             UserName = userName;
@@ -35,9 +35,7 @@ namespace RegistServe.Utils
             From = from;
             AddTo(to);
         }
-        public EmailSender(string serverAndPort, string userName, string password, string from) : this(serverAndPort, userName, password, from, "")
-        {
-        }
+
         /// <summary>
         /// 添加发件人
         /// </summary>
@@ -49,17 +47,12 @@ namespace RegistServe.Utils
                 To += AddSemicolonToAddress(emailAddr);
             }
         }
+
         private string AddSemicolonToAddress(string addrs)
         {
-            if (addrs.Last() == ';')
-            {
-                return addrs;
-            }
-            else
-            {
-                return addrs + ";";
-            }
+            return addrs.Last() == ';' ? addrs : addrs + ";";
         }
+
         /// <summary>
         /// 清空收件人
         /// </summary>
@@ -67,6 +60,7 @@ namespace RegistServe.Utils
         {
             To = "";
         }
+
         /// <summary>
         /// 获取收件人列表
         /// </summary>
@@ -86,6 +80,7 @@ namespace RegistServe.Utils
             }
             return result;
         }
+
         /// <summary>
         /// 发送邮件
         /// </summary>
