@@ -378,7 +378,7 @@ namespace RegistServe
                             {
                                 try
                                 {
-                                    emailSender.Send($"{DateTime.Now:M}-填报日志", result, userInfo.Email);
+                                    emailSender.Send("填报日志", $"{DateTime.Now:M}\n{result}", userInfo.Email);
                                 }
                                 catch (Exception ex)
                                 {
@@ -395,30 +395,6 @@ namespace RegistServe
                 {
                     StringBuilder builder = new StringBuilder();
 
-                    //查询当日填报失败的并且打印日志
-                    IQueryable<UserInfo> userFailed = Program.UnitWork.Find<UserInfo>(p => (p.LastRegistState == false));
-                    if (userFailed?.Count() > 0)
-                    {
-                        builder.AppendLine($"填报失败：{userFailed.Count()}");
-
-                        foreach (UserInfo user in userFailed)
-                        {
-                            RegistLog log = Program.UnitWork.Find<RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
-                            if (log != null)
-                            {
-                                builder.AppendLine(
-    $@"{log.Name}
-{log.Time}
-{log.LogLevel}
-{log.Message}
-");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        builder.AppendLine($"今天很棒，没有人填报失败o(*￣▽￣*)ブ");
-                    }
                     //查询当日填报成功的并且打印日志
                     IQueryable<UserInfo> userSuccess = Program.UnitWork.Find<UserInfo>(p => p.LastRegistState);
                     if (userSuccess?.Count() > 0)
@@ -444,9 +420,34 @@ namespace RegistServe
                         builder.AppendLine($"糟糕的一天，没有人填报成功(T_T)");
                     }
 
+                    //查询当日填报失败的并且打印日志
+                    IQueryable<UserInfo> userFailed = Program.UnitWork.Find<UserInfo>(p => (p.LastRegistState == false));
+                    if (userFailed?.Count() > 0)
+                    {
+                        builder.AppendLine($"填报失败：{userFailed.Count()}");
+
+                        foreach (UserInfo user in userFailed)
+                        {
+                            RegistLog log = Program.UnitWork.Find<RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
+                            if (log != null)
+                            {
+                                builder.AppendLine(
+    $@"{log.Name}
+{log.Time}
+{log.LogLevel}
+{log.Message}
+");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        builder.AppendLine($"今天很棒，没有人填报失败o(*￣▽￣*)ブ");
+                    }
+
                     try
                     {
-                        emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), Program.Setting.SysEmailConfig.RecvSysLogAddr);
+                        emailSender.Send("填报日志-管理员", $"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}\n{builder}", Program.Setting.SysEmailConfig.RecvSysLogAddr);
                     }
                     catch (Exception ex)
                     {
