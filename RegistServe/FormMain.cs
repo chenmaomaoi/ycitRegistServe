@@ -34,23 +34,6 @@ namespace RegistServe
             BindingList<UserInfo> users = new BindingList<UserInfo>(Program.UnitWork.Finds<UserInfo>(p => p.GUID != null).ToList());
 
             dataGridView.DataSource = users;
-
-            //foreach (UserInfo item in userInfos)
-            //{
-            //    object[] obj = new object[dataGridView.ColumnCount];
-
-            //    //第一行用于选中
-            //    obj[0] = (object)false;
-
-            //    object[] tmpObj = item.ToObjicts();
-
-            //    for (int i = 0; i < tmpObj.Count(); i++)
-            //    {
-            //        obj[i + 1] = tmpObj[i];
-            //    }
-
-            //    dataGridView.Rows.Add(obj);
-            //}
         }
 
         /// <summary>
@@ -379,6 +362,8 @@ namespace RegistServe
             // 设置 每天的00：00：00开始执行程序
             if (intHour == iHour && intMinute == iMinute/* && intSecond == iSecond*/)
             {
+                EmailSender emailSender = new EmailSender(Program.Setting.SysEmailConfig.ServerAndPort, Program.Setting.SysEmailConfig.UserName, Program.Setting.SysEmailConfig.Password);
+
                 //全部填报
                 IQueryable<UserInfo> userInfos = Program.UnitWork.Find<UserInfo>(p => p.LastRegistTime != DateTime.Now);
 
@@ -386,67 +371,73 @@ namespace RegistServe
                 {
                     foreach (UserInfo userInfo in userInfos)
                     {
-                        //todo:按照配置填报
-                        //todo:发送日志（用户）
-                        Regist(userInfo);
+                        if (userInfo.EndTime > DateTime.Now)
+                        {
+                            string result = Regist(userInfo);
+                            if (Program.Setting.SysEmailConfig.EnableEmailNotification && userInfo.EnableEmailNotification)
+                            {
+                                emailSender.Send($"{DateTime.Now:M}-填报日志", result, userInfo.Email);
+                            }
+                        }
                     }
                     Program.UnitWork.Save();
                 }
 
-                StringBuilder builder = new StringBuilder();
-
-                //查询当日填报失败的并且打印日志
-                IQueryable<UserInfo> userFailed = Program.UnitWork.Find<UserInfo>(p => (p.LastRegistState == false));
-                if (userFailed?.Count() > 0)
+                if (Program.Setting.SysEmailConfig.EnableSysLogEmail)
                 {
-                    builder.AppendLine($"填报失败：{userFailed.Count()}");
+                    StringBuilder builder = new StringBuilder();
 
-                    foreach (UserInfo user in userFailed)
+                    //查询当日填报失败的并且打印日志
+                    IQueryable<UserInfo> userFailed = Program.UnitWork.Find<UserInfo>(p => (p.LastRegistState == false));
+                    if (userFailed?.Count() > 0)
                     {
-                        RegistLog log = Program.UnitWork.Find<RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
-                        if (log != null)
+                        builder.AppendLine($"填报失败：{userFailed.Count()}");
+
+                        foreach (UserInfo user in userFailed)
                         {
-                            builder.AppendLine(
-$@"{log.Name}
+                            RegistLog log = Program.UnitWork.Find<RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
+                            if (log != null)
+                            {
+                                builder.AppendLine(
+    $@"{log.Name}
 {log.Time}
 {log.LogLevel}
 {log.Message}
 ");
+                            }
                         }
                     }
-                }
-                else
-                {
-                    builder.AppendLine($"今天很棒，没有人填报失败o(*￣▽￣*)ブ");
-                }
-                //查询当日填报成功的并且打印日志
-                IQueryable<UserInfo> userSuccess = Program.UnitWork.Find<UserInfo>(p => p.LastRegistState);
-                if (userSuccess?.Count() > 0)
-                {
-                    builder.AppendLine($"填报成功：{userSuccess.Count()}");
-
-                    foreach (UserInfo user in userSuccess)
+                    else
                     {
-                        RegistLog log = Program.UnitWork.Find<RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
-                        if (log != null)
+                        builder.AppendLine($"今天很棒，没有人填报失败o(*￣▽￣*)ブ");
+                    }
+                    //查询当日填报成功的并且打印日志
+                    IQueryable<UserInfo> userSuccess = Program.UnitWork.Find<UserInfo>(p => p.LastRegistState);
+                    if (userSuccess?.Count() > 0)
+                    {
+                        builder.AppendLine($"填报成功：{userSuccess.Count()}");
+
+                        foreach (UserInfo user in userSuccess)
                         {
-                            builder.AppendLine(
-$@"{log.Name}
+                            RegistLog log = Program.UnitWork.Find<RegistLog>(p => p.Username == user.Username).OrderByDescending(p => p.Time).First();
+                            if (log != null)
+                            {
+                                builder.AppendLine(
+    $@"{log.Name}
 {log.Time}
 {log.LogLevel}
 {log.Message}
 ");
+                            }
                         }
                     }
-                }
-                else
-                {
-                    builder.AppendLine($"糟糕的一天，没有人填报成功(T_T)");
-                }
+                    else
+                    {
+                        builder.AppendLine($"糟糕的一天，没有人填报成功(T_T)");
+                    }
 
-                //todo:发送日志（管理员）
-                EmailSender emailSender = new EmailSender("smtp.163.com:25", "c1325242398@163.com", "WWRURIXBPYGJSGEO");
-                emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), "1325242398@qq.com");
+                    emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), Program.Setting.SysEmailConfig.RecvSysLogAddr);
+                }
 
                 this.Invoke(new EventHandler(delegate
                 {
@@ -454,7 +445,7 @@ $@"{log.Name}
                 }));
             }
         }
-        
+
         /// <summary>
         /// 绑定复选框和Timer
         /// </summary>
