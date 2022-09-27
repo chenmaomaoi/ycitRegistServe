@@ -376,7 +376,15 @@ namespace RegistServe
                             string result = Regist(userInfo);
                             if (Program.Setting.SysEmailConfig.EnableEmailNotification && userInfo.EnableEmailNotification)
                             {
-                                emailSender.Send($"{DateTime.Now:M}-填报日志", result, userInfo.Email);
+                                try
+                                {
+                                    emailSender.Send($"{DateTime.Now:M}-填报日志", result, userInfo.Email);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Logger.Logging(userInfo, ex.Message, LogLevel.Warning);
+                                    //记录邮件发送异常
+                                }
                             }
                         }
                     }
@@ -436,7 +444,15 @@ namespace RegistServe
                         builder.AppendLine($"糟糕的一天，没有人填报成功(T_T)");
                     }
 
-                    emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), Program.Setting.SysEmailConfig.RecvSysLogAddr);
+                    try
+                    {
+                        emailSender.Send($"{DateTime.Now:M}-{userSuccess.Count()}/{userInfos.Count()}", builder.ToString(), Program.Setting.SysEmailConfig.RecvSysLogAddr);
+                    }
+                    catch (Exception ex)
+                    {
+                        //记录邮件发送异常
+                        Logger.Logging(new UserInfo() { Name = "Admin" }, ex.Message, LogLevel.Warning);
+                    }
                 }
 
                 this.Invoke(new EventHandler(delegate
@@ -467,7 +483,7 @@ namespace RegistServe
 
         private void btn_AdminEmailSetting_Click(object sender, EventArgs e)
         {
-            new FormAdminEmailSetting().ShowDialog();
+            new FormAdminEmailSetting().ShowDialog(this);
         }
     }
 }
