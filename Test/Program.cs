@@ -13,9 +13,32 @@ namespace Test
         static System.Timers.Timer timer;
         static User user;
 
+        public class name
+        {
+            string j;
+            public name(string j)
+            {
+                this.j = j;
+            }
+
+        }
+
+        public class person:name
+        {
+            string f;
+
+            public person(string f, string j) : base(j)
+            {
+                this.f = f;
+
+            }
+        }
+
         [STAThread]
         static void Main(string[] args)
         {
+            person person = new person("ss", "jj");
+
             //user = new User("42280119990902281X",
             //                "c1325242398",
             //                "xqzu41ueJK5P0tcz2QnBmv72YBWNu7l3Kk9UQQs6rmH5ydpfGCfwO6ssK5k7gwj5",

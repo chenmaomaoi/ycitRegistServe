@@ -125,10 +125,10 @@ namespace ycit
         /// <exception cref="非填报时间等错误"></exception>
         public bool Regist()
         {
-            //if (!HasLogin())
-            //{
-            //    throw new InvalidOperationException("未登录");
-            //}
+            if (!HasLogin())
+            {
+                throw new InvalidOperationException("未登录");
+            }
 
             //初始化 ChromeDriver
             ChromeOptions options = new ChromeOptions();
@@ -198,7 +198,9 @@ namespace ycit
 
                 //打开个人信息页面
                 chromeDriver.Navigate().GoToUrl(URL + PathProfile);
-                new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 3));
+                var wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(50));
+                //wait.Timeout =  TimeSpan.FromSeconds(3);
+                //wait.Until(p => p.FindElement(By.Id("regist_button")));
 
                 //检查填报按钮是否存在
                 _ = chromeDriver.FindElement(By.Id("regist_button")).Text;
