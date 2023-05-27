@@ -112,7 +112,6 @@
     <Compile Include="DB\BaseDBContext.cs" />
     <Compile Include="DB\Domain\RegistLog.cs" />
     <Compile Include="DB\Domain\UserInfo.cs" />
-    <Compile Include="DB\Intetface\IUnitWork.cs" />
     <Compile Include="DB\UnitWork.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FormAddAndUpdate.cs">
